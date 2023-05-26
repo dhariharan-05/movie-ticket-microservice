@@ -1,0 +1,56 @@
+package com.mscomm.userservice.controller;
+
+import lombok.AllArgsConstructor;
+import com.mscomm.userservice.dto.ResponseDto;
+import com.mscomm.userservice.entity.User;
+import com.mscomm.userservice.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+@RestController
+@RequestMapping("api/users")
+@AllArgsConstructor
+@CrossOrigin(origins="http://localhost:3000")
+public class UserController {
+	  private UserService userService;
+
+	    @PostMapping
+	    public ResponseEntity<User> saveUser(@RequestBody User user){
+	        User savedUser = userService.saveUser(user);
+	        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+	    }
+
+	    @GetMapping("{id}")
+	    public ResponseEntity<ResponseDto> getUser(@PathVariable("id") Long userId){
+	        ResponseDto responseDto = userService.getUser(userId);
+	        return ResponseEntity.ok(responseDto);
+	    }
+	    @PutMapping("{id}")
+	    public ResponseEntity<User> updateUser(@PathVariable("id") Long userId, @RequestBody User updatedUser) {
+	        User user = userService.getUserById(userId);
+	        
+	        if (user == null) {
+	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	        }
+
+	        // Update the fields of the existing user with the new values
+	        user.setName(updatedUser.getName());
+	        user.setPassword(updatedUser.getPassword());
+	        user.setEmail(updatedUser.getEmail());
+	        user.setSeat(updatedUser.getSeat());
+	        user.setDatetime(updatedUser.getDatetime());
+	        user.setPrice(updatedUser.getPrice());
+	        user.setTheatreId(updatedUser.getTheatreId());
+	        user.setMovieId(updatedUser.getMovieId());
+	        user.setRestatus(updatedUser.getRestatus());
+
+	        User updatedUser1 = userService.saveUser(user);
+	        return new ResponseEntity<>(updatedUser1, HttpStatus.OK);
+	    }
+	}
+//	    @GetMapping("{name}")
+//	    public ResponseEntity<ResponseDto> getUserByName(@PathVariable("name") String userName){
+//	        ResponseDto responseDto = userService.getUserByName(userName);
+//	        return ResponseEntity.ok(responseDto);
+//	    }
+

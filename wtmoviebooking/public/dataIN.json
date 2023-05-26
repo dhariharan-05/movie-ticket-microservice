@@ -1,0 +1,311 @@
+{
+    "dates": {
+        "maximum": "2023-04-03",
+        "minimum": "2023-03-17"
+    },
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "/ej3y6rQLcArQcYZvcNSkXPMvW6O.jpg",
+            "genre_ids": [
+                18,
+                53
+            ],
+            "id": 986594,
+            "original_language": "hi",
+            "original_title": "मिसिज़ चैटर्जी वर्सेज़ नॉर्वे",
+            "overview": "An immigrant Indian mother fights the Norwegian foster care system and legal machinery to win back custody of her children.",
+            "popularity": 6.854,
+            "poster_path": "/uy26E04DxYdICergibgtAFIUuDo.jpg",
+            "release_date": "2023-03-17",
+            "title": "Mrs.ChatterjeeVsNorway",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/j88chRoyvl5PEWWj4TuE4Hqx6Yk.jpg",
+            "genre_ids": [
+                28,
+                18
+            ],
+            "id": 683876,
+            "original_language": "kn",
+            "original_title": "Kabzaa",
+            "overview": "Journey of a simple man from a humble flower market to the underworld. Circumstances forces him to take weapon and a simple man ends up becoming the most dreaded man in the underworld.",
+            "popularity": 6.796,
+            "poster_path": "/8WHFYOUnKbylQBo9OPnQBqV4RiE.jpg",
+            "release_date": "2023-03-17",
+            "title": "Kabzaa",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/isEbN3vktZzU9038bXxh9LN2MVM.jpg",
+            "genre_ids": [
+                10749,
+                35
+            ],
+            "id": 1069895,
+            "original_language": "te",
+            "original_title": "ఫలానా అబ్బాయి ఫలానా అమ్మాయి",
+            "overview": "A heart warming romantic tale of  Sanjay and Anupama from their teenage to their 28th year.",
+            "popularity": 6.205,
+            "poster_path": "/5yXcvXk4VCFn3WJW9U7Ka45yvBP.jpg",
+            "release_date": "2023-03-17",
+            "title": "PhalanaAbbayiPhalanaAmmayi",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/ela0vO7QFFTuQdUatbwD4S6qMCX.jpg",
+            "genre_ids": [
+                18
+            ],
+            "id": 1014060,
+            "original_language": "hi",
+            "original_title": "Zwigato",
+            "overview": "Set in Bhubaneshwar, Odisha the film is a sociopolitical gaze on the gig economy, from the perspective of a food-app delivery driver and his trials and tribulations.",
+            "popularity": 5.372,
+            "poster_path": "/cy5prmLqNUVOqfEqa0ArhqIRDB1.jpg",
+            "release_date": "2023-03-17",
+            "title": "Zwigato",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": null,
+            "genre_ids": [],
+            "id": 927223,
+            "original_language": "kn",
+            "original_title": "Hoysala",
+            "overview": "",
+            "popularity": 3.995,
+            "poster_path": "/yyce9MvaGuVem9OD6Ptaj800uCZ.jpg",
+            "release_date": "2023-03-30",
+            "title": "Hoysala",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/p5rhqWHA1tIfEgozKnJZpUwOUYJ.jpg",
+            "genre_ids": [
+                28,
+                53
+            ],
+            "id": 882392,
+            "original_language": "ta",
+            "original_title": "பத்து தல",
+            "overview": "An undercover cop goes into the big bad world, a place taken over by a don, where his safety may be compromised.",
+            "popularity": 3.206,
+            "poster_path": "/r0t36qEw53A8U1CI5tAcCsUeq0H.jpg",
+            "release_date": "2023-03-30",
+            "title": "PathuThala",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": null,
+            "genre_ids": [
+                28,
+                80,
+                53
+            ],
+            "id": 1020330,
+            "original_language": "hi",
+            "original_title": "Hacker 3.0",
+            "overview": "Haker 2.0 Part - 2",
+            "popularity": 3.925,
+            "poster_path": "/8qmMS1cOMDMqDXd3EJbjUMh1N6k.jpg",
+            "release_date": "2023-03-24",
+            "title": "Hacker3.0",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/hxqc4x1Ifxf3DSzqtuEUDMIkSqN.jpg",
+            "genre_ids": [
+                18
+            ],
+            "id": 1081726,
+            "original_language": "hi",
+            "original_title": "भीड़",
+            "overview": "A social drama, shedding light on the dichotomy and complexities through the toughest times India faced. A crisis that shook the whole nation, a time when borders of disparity divided the people and one man stood for humanity.",
+            "popularity": 5.113,
+            "poster_path": "/sJ3uHEY9LLP0BpdPy0KlJzYnmkv.jpg",
+            "release_date": "2023-03-24",
+            "title": "Bheed",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": null,
+            "genre_ids": [
+                35,
+                18
+            ],
+            "id": 1073117,
+            "original_language": "hi",
+            "original_title": "शुभ निकाह",
+            "overview": "Upcoming Hindi social drama movie directed by Arshad Siddiqui.",
+            "popularity": 4.92,
+            "poster_path": "/2s08kQB6PCY3TAGkBwdR0xdPvb9.jpg",
+            "release_date": "2023-03-17",
+            "title": "ShubhNikah",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/tj6yPh5AKh17Tav2QQuk9q8njNI.jpg",
+            "genre_ids": [
+                28,
+                53,
+                80
+            ],
+            "id": 965606,
+            "original_language": "hi",
+            "original_title": "भोला",
+            "overview": "An ex-convict endeavours to meet his daughter for the first time after leaving prison. However, his attempts are interrupted due to a drug raid planned by an Inspector.",
+            "popularity": 4.418,
+            "poster_path": "/iIpevyUKHn2tYydRWeHIDz51YXW.jpg",
+            "release_date": "2023-03-30",
+            "title": "Bholaa",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/hcqY0Er8AhU3UiSAxB5tT6sBiZv.jpg",
+            "genre_ids": [
+                28,
+                53
+            ],
+            "id": 885184,
+            "original_language": "te",
+            "original_title": "దసరా",
+            "overview": "",
+            "popularity": 2.94,
+            "poster_path": "/uzhNxKy20k3MiGKWLApuegbAcRD.jpg",
+            "release_date": "2023-03-30",
+            "title": "Dasara",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": null,
+            "genre_ids": [
+                18
+            ],
+            "id": 1094544,
+            "original_language": "pa",
+            "original_title": "Es Jahano Door Kitte Chal Jindiye",
+            "overview": "Emotional bonds and friendship that ties strangers together in a foreign land.",
+            "popularity": 3.208,
+            "poster_path": "/sZYyMrmaPdJGUh4OzAp1gvUzY9L.jpg",
+            "release_date": "2023-03-24",
+            "title": "Es-Jahano-Door-Kitte-Chal-Jindiye",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": null,
+            "genre_ids": [
+                36
+            ],
+            "id": 957328,
+            "original_language": "hi",
+            "original_title": "स्वतंत्र वीर सावरकर",
+            "overview": "A polarising figure, Swatantra Veer Savarkar is revered by many as a freedom fighter but criticised by others for his communal ideology and the fact that he wrote mercy petitions to the British authorities from prison. Savarkar was also arrested in connection with Mahatma Gandhi's assassination but later acquitted after no evidence was found against him.",
+            "popularity": 2.176,
+            "poster_path": "/7npv7PcG4DyQLlGiF8VyOX3pJqZ.jpg",
+            "release_date": "2023-03-30",
+            "title": "Swatantra-Veer-Savarkar",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/eX9Xvo5ynXNKHr5EsMO5eL4EXPM.jpg",
+            "genre_ids": [
+                18
+            ],
+            "id": 1095108,
+            "original_language": "ta",
+            "original_title": "ஜம்பு மகாரிஷி",
+            "overview": "story is based on the true story of Jambu Maharishi, who passed away at Thiruvanaikaval near Tiruchi",
+            "popularity": 2.839,
+            "poster_path": "/v27bjxPzGyZ6h43o14OfNWmj8WF.jpg",
+            "release_date": "2023-03-24",
+            "title": "Jambu-Maharishi",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/mztuu1vZV23HL5DWKb68OTszqyD.jpg",
+            "genre_ids": [
+                18,
+                28,
+                53
+            ],
+            "id": 786345,
+            "original_language": "ta",
+            "original_title": "விடுதலை: பாகம் I",
+            "overview": "Kumaresan, a police constable gets recruited for Operation Ghosthunt, which is implanted to capture Perumal Vaathiyar, who leads a separatist group People's Army which are highly dedicated to fighting against the authorities for commiting atrocities against innocent village women in the name of police interrogations.",
+            "popularity": 2.744,
+            "poster_path": "/icqb0d4CJM6gXSdWCBZpaNhvNU.jpg",
+            "release_date": "2023-03-30",
+            "title": "Viduthalai:Part-I",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        },
+   
+        {
+            "adult": false,
+            "backdrop_path": "/jpqyoPovvTOxcKZLybKH8iNaR1j.jpg",
+            "genre_ids": [
+                28,
+                18
+            ],
+            "id": 1097586,
+            "original_language": "te",
+            "original_title": "గీతసాక్షిగా",
+            "overview": "",
+            "popularity": 1.96,
+            "poster_path": "/iGVDKYLf5rc9JUwCNA2XtIa7wHu.jpg",
+            "release_date": "2023-03-22",
+            "title": "Geetasakshigaa",
+            "video": false,
+            "vote_average": 0,
+            "vote_count": 0
+        }
+    ],
+    "total_pages": 1,
+    "total_results": 18
+}
