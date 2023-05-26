@@ -65,6 +65,7 @@ const handleDateChange = (event) => {
 const numRows = 10; // Number of rows
 const numColumns = 10; // Number of columns
 const seatPrice = 100; // Price per seat
+const unavailableSeats = ["A1", "B2", "C3","F5"]; // Example of unavailable seats
 
 const renderSeats = () => {
   const seats = [];
@@ -74,11 +75,14 @@ const renderSeats = () => {
 
     for (let column = 0; column < numColumns; column++) {
       const seat = `${String.fromCharCode(65 + row)}${column + 1}`;
+      const isAvailable = !unavailableSeats.includes(seat);
+
       rowSeats.push(
         <button
           key={seat}
-          className={`seat ${selectedSeats.includes(seat) ? "selected" : ""}`}
+          className={`seat ${selectedSeats.includes(seat) ? "selected" : ""} ${isAvailable ? "available" : "unavailable"}`}
           onClick={() => handleSeatClick(seat)}
+          disabled={!isAvailable}
         >
           {seat}
         </button>
@@ -138,7 +142,6 @@ return (
       <button type="submit">Submit</button>
     </form>
   </div>
-    
 
   );
   }
