@@ -31,7 +31,8 @@ function Theatrepage() {
 //   const ot = ReactSession.get("original_title")
 //   const pop = ReactSession.get("popularity");
 //   const lan = ReactSession.get("original_language");
-let navigate = useNavigate();
+const navigate = useNavigate();
+
   var tname=ReactSession.get("theatrename");
   var user=ReactSession.get("username");
   var ids=ReactSession.get("id");
@@ -57,6 +58,7 @@ var [movId,setMovieid] = useState("");
         console.error(error);
       });
     },[]);
+
 console.log(user);
 console.log(ids);
 console.log(tid);
@@ -168,6 +170,16 @@ Apicalls.PutUser(udetail)
   console.error(error);
  })
 }
+useEffect(() => {
+  if (updateSuccess) {
+    const timer = setTimeout(() => {
+      navigate("/movies"); // Redirect to '/movies' after 2 seconds
+    }, 2000);
+
+    return () => clearTimeout(timer); // Clear the timer on component unmount
+  }
+}, [updateSuccess, navigate]);
+
 return (
   <div className="seat-picker">
     <div className="screen">SCREEN</div>
@@ -198,7 +210,7 @@ return (
       <button type="submit">Submit</button>
       {updateSuccess &&
           <Alert severity="success" size="small">
-           Booking success!
+           Booking success!Redirecting to movies .. 
           </Alert>
         }
     </form>
