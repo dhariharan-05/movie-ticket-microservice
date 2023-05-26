@@ -9,7 +9,18 @@ import Switch from "@mui/material/Switch";
 // import SeatPicker from "react-seat-picker";
 import React, { useState } from "react";
 import "./SeatPicker.css";
-
+import {
+  TextField,
+  InputAdornment,
+  FormControl,
+  InputLabel,
+  IconButton,
+  Button,
+  Input,
+  Checkbox,
+  Alert,
+  Stack,
+} from "@mui/material";
 import Loginmain from "./Loginmain";
 import Signup from "./Signup";
 import { WidthFull } from "@mui/icons-material";
@@ -23,27 +34,41 @@ function Theatrepage() {
 let navigate = useNavigate();
   var tname=ReactSession.get("theatrename");
   var user=ReactSession.get("username");
-  var id=ReactSession.get("id");
+  var ids=ReactSession.get("id");
   var password=ReactSession.get("password");
   var tid=ReactSession.get("tid");
   var email=ReactSession.get("email");
   var movienam= ReactSession.get("moviename")
-
+var [movId,setMovieid] = useState("");
 //   var mid=ReactSession.get("mid");
-const mdetail2 = {
-    movieName: ReactSession.get("original_title"),
+
+ useEffect(() =>{
+  const mdetail2 = {
+    movieName: ReactSession.get("moviename"),
     
   };
-  
-console.log(id);
+  Apicalls.GetMid(mdetail2)
+      .then(response => {
+        console.log(response);
+         setMovieid(response.data.id);
+        // console.log(movId); // Assuming the response has a boolean field indicating if the movie exists
+        })
+      .catch(error => {
+        console.error(error);
+      });
+    },[]);
+console.log(user);
+console.log(ids);
 console.log(tid);
 console.log(password);
 console.log(email);
 console.log(movienam);
+console.log(movId);
 
 
-const [selectedSeats, setSelectedSeats] = useState([]);
-const [showDate, setShowDate] = useState("");
+var [selectedSeats, setSelectedSeats] = useState([]);
+var [showDate, setShowDate] = useState("");
+var [price,setPrice] = useState("");
 const todayDate = new Date().toISOString().split("T")[0];
 
 const handleSeatClick = (seat) => {
@@ -65,8 +90,8 @@ const handleDateChange = (event) => {
 const numRows = 10; // Number of rows
 const numColumns = 10; // Number of columns
 const seatPrice = 100; // Price per seat
-const unavailableSeats = ["A1", "B2", "C3","F5"]; // Example of unavailable seats
-
+const unavailableSeats = ["A1","B2","C3","F5"]; // Example of unavailable seats
+const [updateSuccess, setUpdateSuccess] = useState(false); // State variable for update success
 const renderSeats = () => {
   const seats = [];
 
@@ -80,7 +105,7 @@ const renderSeats = () => {
       rowSeats.push(
         <button
           key={seat}
-          className={`seat ${selectedSeats.includes(seat) ? "selected" : ""} ${isAvailable ? "available" : "unavailable"}`}
+          className={`seat ${selectedSeats.includes(seat) ? "selected" :""} ${isAvailable ? "available" : "unavailable"}`}
           onClick={() => handleSeatClick(seat)}
           disabled={!isAvailable}
         >
@@ -109,9 +134,40 @@ const handleSubmit = (event) => {
   // Perform actions on form submission
   console.log("Date:", showDate);
   console.log("Selected Seats:", selectedSeats);
+  var p = calculateTotalPrice();
+  setPrice(p);
+  console.log(price);
   console.log("Total Price:", calculateTotalPrice());
+  const seatt = `[${selectedSeats.join(", ")}]`; // Convert selectedSeats array to a string enclosed in square brackets
+  console.log("Seats:", seatt);
+  performPut(seatt,p);
 };
+function performPut(seatt,p){
+ //var seatt= "E3";
+  var sta= "true";
+const udetail={
+  id:ids,
+  name:user,
+  password:password,
+  email:email,
+  seat:seatt,
+  datetime:showDate,
+  price:p,
+  theatreId:tid,
+  movieId:movId,
+  restatus:sta
+}
+//console.log(udetail);
+Apicalls.PutUser(udetail)
+ .then(() => {
+  console.log("updated successfully")
+  setUpdateSuccess(true); // Set the update success state to true
 
+ })
+ .catch(error => {
+  console.error(error);
+ })
+}
 return (
   <div className="seat-picker">
     <div className="screen">SCREEN</div>
@@ -140,6 +196,11 @@ return (
         </select>
       </div>
       <button type="submit">Submit</button>
+      {updateSuccess &&
+          <Alert severity="success" size="small">
+           Booking success!
+          </Alert>
+        }
     </form>
   </div>
 

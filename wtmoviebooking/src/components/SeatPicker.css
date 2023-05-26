@@ -52,6 +52,7 @@
 
 .seat.selected {
   background-color: #ff5f6d;
+  color: #ffffff;
 }
 
 
@@ -102,4 +103,16 @@ form button[type="submit"] {
 
 form button[type="submit"]:hover {
   background-color: #ff1677;
+}
+.available {
+  /* Styles for available seats */
+  background-color: #bbbbbb;
+  color: #000000;
+}
+
+.unavailable {
+  /* Styles for unavailable seats */
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
 }

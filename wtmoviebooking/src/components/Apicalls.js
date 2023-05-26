@@ -11,12 +11,26 @@ export const Apicalls ={
     Theatres,
     Movies,
     CheckMovie,
-    GetMid
+    GetMid,
+    GetUser,
+    PutUser
 }
 function Theatres(tdetail){
     return instance1.post('api/theatres',tdetail,{
         headers: { 'Content-type': 'application/json'}
     })
+}
+function GetUser(udetail){
+  return instance2.get('api/users/'+udetail.id, {
+    //   params: mdetail1,
+      headers: { 'Content-type': 'application/json' }
+    });
+
+}
+function PutUser(udetail){
+  return instance2.put('api/users/'+udetail.id,udetail,{
+    headers: { 'Content-type': 'application/json'}
+})
 }
 function Movies(mdetail){
     return instance.post('api/Movies',mdetail,{
@@ -47,4 +61,7 @@ const instance = axios.create({
 })
 const instance1 = axios.create({
     baseURL: config.url.API_BASE_URL1
+})
+const instance2 = axios.create({
+  baseURL: config.url.API_BASE_URL
 })
