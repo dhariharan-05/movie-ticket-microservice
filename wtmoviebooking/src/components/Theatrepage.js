@@ -70,6 +70,7 @@ console.log(movId);
 
 var [selectedSeats, setSelectedSeats] = useState([]);
 var [showDate, setShowDate] = useState("");
+var [showTime, setShowTime] = useState("");
 var [price,setPrice] = useState("");
 const todayDate = new Date().toISOString().split("T")[0];
 
@@ -87,6 +88,9 @@ const handleSeatClick = (seat) => {
 
 const handleDateChange = (event) => {
   setShowDate(event.target.value);
+};
+const handleTimeChange = (event) => {
+  setShowTime(event.target.value);
 };
 
 const numRows = 10; // Number of rows
@@ -135,6 +139,7 @@ const handleSubmit = (event) => {
   event.preventDefault();
   // Perform actions on form submission
   console.log("Date:", showDate);
+  console.log("Time:", showTime);
   console.log("Selected Seats:", selectedSeats);
   var p = calculateTotalPrice();
   setPrice(p);
@@ -200,7 +205,8 @@ return (
       </div>
       <div className="form-row">
         <label>Time:</label>
-        <select>
+        <select value={showTime} onChange={handleTimeChange}>
+          <option value="">hh:mm AM</option>
           <option value="09:00 AM">09:00 AM</option>
           <option value="12:00 PM">12:00 PM</option>
           <option value="03:00 PM">03:00 PM</option>
