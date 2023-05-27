@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import com.mscomm.userservice.dto.ResponseDto;
 import com.mscomm.userservice.entity.User;
 import com.mscomm.userservice.service.UserService;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +29,19 @@ public class UserController {
 	        ResponseDto responseDto = userService.getUser(userId);
 	        return ResponseEntity.ok(responseDto);
 	    }
+	    @GetMapping("/{tid}/{mid}")
+	    public List<ResponseEntity<User>> getUser(@PathVariable("tid") String theatreId, @PathVariable("mid") String movieId) {
+	        List<User> users = userService.getByTheatreIdAndMovieId(theatreId, movieId);
+
+	        List<ResponseEntity<User>> responseEntities = new ArrayList<>();
+
+	        for (User user : users) {
+	            responseEntities.add(ResponseEntity.ok(user));
+	        }
+
+	        return responseEntities;
+	    }
+
 	    @PutMapping("{id}")
 	    public ResponseEntity<User> updateUser(@PathVariable("id") Long userId, @RequestBody User updatedUser) {
 	        User user = userService.getUserById(userId);

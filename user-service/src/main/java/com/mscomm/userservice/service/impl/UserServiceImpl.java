@@ -6,6 +6,9 @@ import com.mscomm.userservice.repository.*;
 import org.springframework.web.client.RestTemplate;
 import com.mscomm.userservice.dto.*;
 import lombok.AllArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 @Service
@@ -81,6 +84,13 @@ public class UserServiceImpl implements UserService {
 
         return user;
 	}
+	
+	@Override
+	public List<User> getByTheatreIdAndMovieId(String theatreId, String movieId) {
+		
+	    return userRepository.findByTheatreIdAndMovieId(theatreId, movieId);
+	}
+	
 	private UserDto mapToUser(User user){
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());

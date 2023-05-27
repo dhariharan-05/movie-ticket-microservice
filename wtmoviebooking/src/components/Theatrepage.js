@@ -1,4 +1,3 @@
-
 import Chip from "@mui/material/Chip";
 import FaceIcon from "@mui/icons-material/Face";
 import Paper from "@mui/material/Paper";
@@ -49,25 +48,39 @@ var [seat,setSeat] = useState("");
     movieName: ReactSession.get("moviename"),
     
   };
-  const udetail = {
-    id: ReactSession.get("id"),
-  }
+
   Apicalls.GetMid(mdetail2)
       .then(response => {
         console.log(response);
          setMovieid(response.data.id);
+         ReactSession.set("movieId", response.data.id);         
+         console.log(movId);
         // console.log(movId); // Assuming the response has a boolean field indicating if the movie exists
         })
       .catch(error => {
         console.error(error);
       });
-  Apicalls.GetUser(udetail)
-  .then(response => {
-    console.log(response.data.user.seat)
-    setSeat(response.data.user.seat)
-  })
+      const udetail = {
+        id: ReactSession.get("id"),
+        movieId: ReactSession.get("movieId"),
+        theatreId: ReactSession.get("tid"),
+      }
+  // Apicalls.GetUser(udetail)
+  // .then(response => {
+  //   console.log(response.data.user.seat)
+  //   setSeat(response.data.user.seat)
+  // })
+  Apicalls.GetSeat(udetail).then(
+    response => {
+      const responseData = response.data; // Store response data in a variable
+      const seatArray = responseData.map((item) => item.body.seat.replace(/[\[\]]+/g, '')); // Extract seat information from each user object and remove square brackets
+      const combinedSeats = "[" + seatArray.join(',') + "]"; // Combine seat information into a single string separated by commas and enclosed in square brackets
+      console.log(combinedSeats); // Display the combined seats string
+      setSeat(combinedSeats);
+    })
     },[]);
 
+    console.log(ReactSession.get("movieId"));
 console.log(user);
 console.log(ids);
 console.log(tid);

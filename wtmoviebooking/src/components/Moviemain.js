@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Grid, Toolbar,  FormControl, InputLabel, Select, MenuItem} from "@mui/material";
 import MovieCards from "./MovieCards";
-import { ReactSession } from 'react-client-session'
 import { Apicalls } from "./Apicalls";
 import { Link } from "react-router-dom";
+import { ReactSession } from 'react-client-session';
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,7 +13,12 @@ import "react-toastify/dist/ReactToastify.css";
 function Moviemain(){
   var re1;
   const navigate = useNavigate();
-
+var usern = ReactSession.get("username");
+var tid = ReactSession.get("tid");
+var mid = ReactSession.get("movId");
+console.log(tid);
+console.log(mid);
+console.log(usern);
   const [data, setData] = useState([]);
   const [resp, setResp] = useState("");
   const [samp, setSamp] = useState("");
@@ -105,7 +110,7 @@ function Moviemain(){
 
   return (
 <Container>
-{resp === "true" ? (
+{resp === "true" && usern === "null" ? (
   <div>
    <ToastContainer />
       <Link to="/reservation">Check your reservations</Link>
