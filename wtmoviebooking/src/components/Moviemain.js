@@ -4,13 +4,18 @@ import { Container, Grid, Toolbar,  FormControl, InputLabel, Select, MenuItem} f
 import MovieCards from "./MovieCards";
 import { ReactSession } from 'react-client-session'
 import { Apicalls } from "./Apicalls";
+import { Link } from "react-router-dom";
+
 function Moviemain(){
-  var re;
+  var re1;
+  
   const [data, setData] = useState([]);
   const [resp, setResp] = useState("");
+  const [samp, setSamp] = useState("");
   const [region, setRegion] = React.useState('India');
-   var ids=ReactSession.get("id");
-  console.log(ids);
+  
+  
+ //ReactSession.set("restatus","");
   const handleChange = (event) => {
     setRegion(event.target.value);
   };
@@ -33,28 +38,59 @@ function Moviemain(){
         console.log(k);
       });
   };
-
   useEffect(() => {
-    (region =='India' ? getData() : getGData())
+    (region === 'India' ? getData() : getGData())
+    var ids=ReactSession.get("id");
+    console.log(ids);
     const udetail = {
       id: ReactSession.get("id"),
     }
     console.log(udetail);
-    Apicalls.GetUser(udetail).then(response =>{
-     //console.log(response.data.user.restatus);
-     setResp(response.data.user.restatus)
-     ReactSession.set("restatus",resp);
-     console.log(resp);
-    }
-      ).catch(error => {
+    
+    Apicalls.GetUser(udetail)
+      .then(response => {
+        console.log(response.data.user.restatus);
+        setResp(response.data.user.restatus);
+        ReactSession.set("restatus", response.data.user.restatus);
+        console.log(response.data.user.restatus);
+        
+        // Move the code that depends on resp inside this callback
+        const re = ReactSession.get("restatus");
+        console.log(re);
+        
+      })
+      .catch(error => {
         console.error(error);
       });
- 
-    
+      console.log(resp);
   }, []);
 
+// useEffect(() => {
+//     (region =='India' ? getData() : getGData())
+    
+//     const udetail = {
+//       id: ReactSession.get("id"),
+//     }
+//     console.log(udetail);
+//     Apicalls.GetUser(udetail).then(response =>{
+//      console.log(response.data.user.restatus);
+//      setResp(response.data.user.restatus);
+//      ReactSession.set("restatus",resp);
+//      console.log(resp);
+//     }
+//       ).catch(error => {
+//         console.error(error);
+//       });
+//  re = ReactSession.get("restatus");
+    
+//   }, []);
+
   return (
-    <Container>
+<Container>
+{resp === "true" ? (
+      <Link to="/reservation">Check your reservations</Link>
+    ) : null}
+  
       <Toolbar sx={{justifyContent:'end',marginTop:'05px'}}>
       <FormControl sx={{width:'150px'}}>
         <InputLabel >Region</InputLabel>
