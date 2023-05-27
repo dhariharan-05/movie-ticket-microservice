@@ -5,10 +5,15 @@ import MovieCards from "./MovieCards";
 import { ReactSession } from 'react-client-session'
 import { Apicalls } from "./Apicalls";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function Moviemain(){
   var re1;
-  
+  const navigate = useNavigate();
+
   const [data, setData] = useState([]);
   const [resp, setResp] = useState("");
   const [samp, setSamp] = useState("");
@@ -63,6 +68,19 @@ function Moviemain(){
         console.error(error);
       });
       console.log(resp);
+       // Display notification and handle click to redirect to /reservation page
+    const handleClick = () => {
+      navigate("/reservation");
+    };
+
+    toast("You have reservations.Click here to redirect to Reservation page...", {
+      onClick: handleClick,
+      onClose: () => {
+        // Handle closing the toast notification if needed
+      },
+      position: toast.POSITION.BOTTOM_RIGHT,
+      // Additional options for the toast notification
+    });
   }, []);
 
 // useEffect(() => {
@@ -88,7 +106,10 @@ function Moviemain(){
   return (
 <Container>
 {resp === "true" ? (
+  <div>
+   <ToastContainer />
       <Link to="/reservation">Check your reservations</Link>
+      </div>
     ) : null}
   
       <Toolbar sx={{justifyContent:'end',marginTop:'05px'}}>

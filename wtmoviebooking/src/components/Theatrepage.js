@@ -41,6 +41,7 @@ const navigate = useNavigate();
   var email=ReactSession.get("email");
   var movienam= ReactSession.get("moviename")
 var [movId,setMovieid] = useState("");
+var [seat,setSeat] = useState("");
 //   var mid=ReactSession.get("mid");
 
  useEffect(() =>{
@@ -48,6 +49,9 @@ var [movId,setMovieid] = useState("");
     movieName: ReactSession.get("moviename"),
     
   };
+  const udetail = {
+    id: ReactSession.get("id"),
+  }
   Apicalls.GetMid(mdetail2)
       .then(response => {
         console.log(response);
@@ -57,6 +61,11 @@ var [movId,setMovieid] = useState("");
       .catch(error => {
         console.error(error);
       });
+  Apicalls.GetUser(udetail)
+  .then(response => {
+    console.log(response.data.user.seat)
+    setSeat(response.data.user.seat)
+  })
     },[]);
 
 console.log(user);
@@ -66,6 +75,7 @@ console.log(password);
 console.log(email);
 console.log(movienam);
 console.log(movId);
+console.log(seat);
 
 
 var [selectedSeats, setSelectedSeats] = useState([]);
@@ -96,7 +106,7 @@ const handleTimeChange = (event) => {
 const numRows = 10; // Number of rows
 const numColumns = 10; // Number of columns
 const seatPrice = 100; // Price per seat
-const unavailableSeats = ["A1","B2","C3","F5"]; // Example of unavailable seats
+const unavailableSeats = seat; // Example of unavailable seats
 const [updateSuccess, setUpdateSuccess] = useState(false); // State variable for update success
 const renderSeats = () => {
   const seats = [];
