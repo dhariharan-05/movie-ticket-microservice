@@ -226,7 +226,7 @@ export default function SignUp() {
         {/* <a>Forgot Password</a> */}
         <br />
         Do you have an account ?{" "}
-        <Link style={{ textDecoration: "underline", color: "blue" }} to="/loginmain">
+        <Link style={{ textDecoration: "underline", color: "blue" }} to="/login">
           Log In
         </Link>
       </div>

@@ -8,7 +8,7 @@ import Navbar2 from '../Navbar2';
 function Contactus() {
   return (
     <>
-
+<Navbar />
       <Footer />
     </>
   );

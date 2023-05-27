@@ -8,6 +8,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import Switch from "@mui/material/Switch";
 import { useState } from "react";
 import Loginmain from "./Loginmain";
+import Login from "./pages/Login";
 import Signup from "./Signup";
 import { WidthFull } from "@mui/icons-material";
 

@@ -9,7 +9,7 @@ import Navbar2 from '../Navbar2';
 function Bookingmain() {
   return (
     <>
-
+     <Navbar />
       <Booking />
     </>
   );

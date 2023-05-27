@@ -15,7 +15,7 @@ import { ReactSession } from 'react-client-session';
 import Footer from './components/Footer';
 import Tpage from './components/pages/Tpage';
 import HeroSection from './components/HeroSection';
-
+import { useState, useEffect } from 'react';
 import Navbar2 from './components/Navbar2'
 import Register from './components/pages/Register';
 import Loginmain from './components/Loginmain';
@@ -24,6 +24,8 @@ import Loginmain from './components/Loginmain';
 
 function App() {
   ReactSession.setStoreType("localStorage");
+
+
   return (
     <>
       {/* <Router>
@@ -39,9 +41,8 @@ function App() {
         <Footer />
       </Router> */}
 
-       <Navbar />
+       
       
-   
       <Routes>
       
         <Route path="/" element={<Home />} />

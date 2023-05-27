@@ -6,9 +6,10 @@ import Theatremain from '../Theatremain'
 import Logincontroller from '../Logincontroller';
 import { useLocation } from "react-router-dom";
 import { ReactSession } from 'react-client-session';
-
+import Navbar from '../Navbar';
 import { Apicalls } from '../Apicalls'
 import { useState } from "react";
+
 function Theatre() {
 //     const TheatreComponent = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ ReactSession.set("original_language",passedProps.original_language);
 
   return (
     <div> 
+      <Navbar />
    <Theatremain />
    <Footer/>
     </div>

@@ -6,7 +6,7 @@ import Theatrepage from '../Theatrepage'
 import Logincontroller from '../Logincontroller';
 import { useLocation } from "react-router-dom";
 import { ReactSession } from 'react-client-session';
-
+import Navbar from '../Navbar';
 import { Apicalls } from '../Apicalls'
 import { useState } from "react";
 function Tpage() {
@@ -18,6 +18,7 @@ function Tpage() {
 
   return (
     <div> 
+      <Navbar/>
    <Theatrepage />
    <Footer/>
     </div>

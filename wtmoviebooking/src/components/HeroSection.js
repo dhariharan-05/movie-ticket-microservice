@@ -1,9 +1,9 @@
 import React from 'react';
 import '../App.css';
-import { Buttonone } from './Buttonone';
+import { Buttonmov } from './Buttonmov';
 import './HeroSection.css';
 import Navbar from './Navbar2';
-
+import { Link } from "react-router-dom";
 
 function HeroSection() {
   return (
@@ -14,13 +14,14 @@ function HeroSection() {
       
       <div className='hero-btns'>
 
-        <Buttonone
+        <Buttonmov
           className='btns'
           buttonStyle='btn--outline'
           buttonSize='btn--large'
         >
           BOOK NOW
-        </Buttonone>
+        </Buttonmov>
+       
         {/* <Button
           className='btns'
           buttonStyle='btn--primary'
