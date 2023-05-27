@@ -28,9 +28,10 @@ function Footer() {
       <div class='footer-links'>
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
-            <h2>About Us</h2>
-            <Link to='/'>Board Members</Link>
-            <Link to='/'>Terms of Service</Link>
+            <h2>Done By</h2>
+            <Link to='/'>Karthik Raj</Link>
+            <Link to='/'>Vigneshe</Link>
+            <Link to='/'>Hariharan Dhanapathy</Link>
           </div>
           <div class='footer-link-items'>
             <h2>Contact Us</h2>

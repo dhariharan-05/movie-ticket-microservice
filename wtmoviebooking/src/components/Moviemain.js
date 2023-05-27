@@ -110,7 +110,7 @@ console.log(usern);
 
   return (
 <Container>
-{resp === "true" && usern === "null" ? (
+{resp === "true" && usern !==null ? (
   <div>
    <ToastContainer />
       <Link to="/reservation">Check your reservations</Link>

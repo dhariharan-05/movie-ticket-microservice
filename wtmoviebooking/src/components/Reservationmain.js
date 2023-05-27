@@ -15,12 +15,13 @@ import { ReactSession } from 'react-client-session';
 import { useNavigate } from "react-router-dom";
 function Reservationmain() {
     const [data, setData] = useState();
-  
-    useEffect(() => {
+    const [renderper, setRenderper] =useState();
+        useEffect(() => {
       const udetail = {
         id: ReactSession.get("id"),
       };
-  
+      setRenderper(ReactSession.get("username"));
+
       Apicalls.GetUser(udetail)
         .then(response => {
           console.log(response.data);
@@ -34,10 +35,11 @@ function Reservationmain() {
   
     return (
       <div>
-       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
+     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
+     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
   <div>
     <h1>Reservation Details:</h1>
-    {data ? (
+    {data && renderper !== null ? (
       <div>
         <p>Datetime: {data.user.datetime}</p>
         <p>Email: {data.user.email}</p>
@@ -53,12 +55,14 @@ function Reservationmain() {
         <p>Theatre Name: {data.department.theatreName}</p>
       </div>
     ) : (
-      <p>Loading...</p>
+      <p>Loading...Please hold on..Check if you're logged in if it takes more than a few seconds to load.</p>
     )}
+  </div>
   </div>
 </div>
 
-      </div>
+</div>
+
     );
   }
   
