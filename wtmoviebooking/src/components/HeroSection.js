@@ -2,7 +2,6 @@ import React from 'react';
 import '../App.css';
 import { Buttonmov } from './Buttonmov';
 import './HeroSection.css';
-import Navbar from './Navbar2';
 import { Link } from "react-router-dom";
 import ScrollButton from 'react-scroll-button';
 function HeroSection() {

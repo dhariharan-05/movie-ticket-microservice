@@ -8,7 +8,6 @@ import Services from './components/pages/Services';
 import Movies from './components/pages/Movies';
 import Contactus from './components/pages/Contactus';
 import Products from './components/pages/Products';
-import Bookingmain from './components/pages/Bookingmain';
 import Login  from './components/pages/Login';
 import Theatre from './components/pages/Theatre';
 import { ReactSession } from 'react-client-session';
@@ -16,7 +15,6 @@ import Footer from './components/Footer';
 import Tpage from './components/pages/Tpage';
 import HeroSection from './components/HeroSection';
 import { useState, useEffect } from 'react';
-import Navbar2 from './components/Navbar2'
 import Register from './components/pages/Register';
 import Loginmain from './components/Loginmain';
 import Reservation from './components/pages/Reservation';
@@ -51,7 +49,6 @@ function App() {
         <Route path="/contactus" element={<Contactus />} />
         {/* <Route path="/experiences" element={<Experiences />} /> */}
         <Route path="/login" element={<Login />} />
-        <Route path="/booking" element={<Bookingmain />} />
         <Route path="/register" element={<Register />} />
         <Route path="/loginmain" element={<Loginmain />} />
         <Route path="/theatre" element={<Theatre />} />
