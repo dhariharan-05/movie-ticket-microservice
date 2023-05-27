@@ -20,4 +20,5 @@ public class UserDto {
 	    private String price;
 	    private String theatreId;
 	    private String movieId;
+	    private String restatus;
 }

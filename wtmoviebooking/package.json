@@ -5,6 +5,9 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.12",
     "@testing-library/jest-dom": "^5.16.5",
@@ -27,6 +30,7 @@
     "react-router-dom": "^6.8.2",
     "react-script": "^2.0.5",
     "react-scripts": "^5.0.1",
+    "react-scroll-button": "^2.0.0",
     "react-seat-picker": "^1.5.3",
     "react-select": "^5.7.0",
     "react-tooltip": "^4.2.2",

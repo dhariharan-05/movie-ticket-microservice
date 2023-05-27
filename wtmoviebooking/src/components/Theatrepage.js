@@ -216,7 +216,7 @@ return (
       <button type="submit">Submit</button>
       {updateSuccess &&
           <Alert severity="success" size="small">
-           Booking success!Redirecting to movies .. 
+           Booking success! Redirecting to movies .. 
           </Alert>
         }
     </form>

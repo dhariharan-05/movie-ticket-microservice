@@ -92,6 +92,7 @@ public class UserServiceImpl implements UserService {
         userDto.setPrice(user.getPrice());
         userDto.setMovieId(user.getMovieId());
         userDto.setTheatreId(user.getTheatreId());
+        userDto.setRestatus(user.getRestatus());
         return userDto;
     }
 

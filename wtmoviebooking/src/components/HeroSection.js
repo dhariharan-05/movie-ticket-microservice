@@ -4,12 +4,19 @@ import { Buttonmov } from './Buttonmov';
 import './HeroSection.css';
 import Navbar from './Navbar2';
 import { Link } from "react-router-dom";
-
+import ScrollButton from 'react-scroll-button';
 function HeroSection() {
   return (
     <div className='hero-container'>
-      <video src='/videos/video-3.mp4' autoPlay loop muted />
-      
+    
+      <video id="vid" src='/videos/video-3.mp4' autoPlay loop muted />
+      {/* <ScrollButton
+      behavior="smooth"
+      buttonBackgroundColor="red"
+      iconType="arrowUp"
+      style={{ fontSize: '24px' }}
+      targetId="vid"
+    /> */}
   <h2 class="heading2">Book movie tickets all from one place</h2>
       
       <div className='hero-btns'>

@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Grid, Toolbar,  FormControl, InputLabel, Select, MenuItem} from "@mui/material";
 import MovieCards from "./MovieCards";
-
+import { ReactSession } from 'react-client-session'
+import { Apicalls } from "./Apicalls";
 function Moviemain(){
+  var re;
   const [data, setData] = useState([]);
- 
-
+  const [resp, setResp] = useState("");
   const [region, setRegion] = React.useState('India');
-
+   var ids=ReactSession.get("id");
+  console.log(ids);
   const handleChange = (event) => {
     setRegion(event.target.value);
   };
@@ -34,11 +36,25 @@ function Moviemain(){
 
   useEffect(() => {
     (region =='India' ? getData() : getGData())
+    const udetail = {
+      id: ReactSession.get("id"),
+    }
+    console.log(udetail);
+    Apicalls.GetUser(udetail).then(response =>{
+     //console.log(response.data.user.restatus);
+     setResp(response.data.user.restatus)
+     ReactSession.set("restatus",resp);
+     console.log(resp);
+    }
+      ).catch(error => {
+        console.error(error);
+      });
+ 
+    
   }, []);
 
   return (
     <Container>
-
       <Toolbar sx={{justifyContent:'end',marginTop:'05px'}}>
       <FormControl sx={{width:'150px'}}>
         <InputLabel >Region</InputLabel>

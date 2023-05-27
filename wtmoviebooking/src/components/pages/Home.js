@@ -12,6 +12,7 @@ function Home() {
   return (
     <>
     <Navbar />
+   
       <HeroSection />
       <Moviemain />
       <Footer />
