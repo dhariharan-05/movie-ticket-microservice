@@ -19,6 +19,7 @@ import { useState, useEffect } from 'react';
 import Navbar2 from './components/Navbar2'
 import Register from './components/pages/Register';
 import Loginmain from './components/Loginmain';
+import Reservation from './components/pages/Reservation';
 
 // import { Route } from 'react-router-dom';
 
@@ -55,6 +56,7 @@ function App() {
         <Route path="/loginmain" element={<Loginmain />} />
         <Route path="/theatre" element={<Theatre />} />
         <Route path="/tpage" element={<Tpage />} />
+        <Route path="/reservation" element={<Reservation />} />
 
       </Routes>
 
