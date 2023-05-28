@@ -57,11 +57,11 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = mapToUser(user);
         
         ResponseEntity<DepartmentDto> responseEntity = restTemplate
-                .getForEntity("http://mysqldb:8082/api/theatres/" + user.getTheatreId(),
+                .getForEntity("http://department-service:8082/api/theatres/" + user.getTheatreId(),
                 DepartmentDto.class);
 
         ResponseEntity<MovieDto> responseEntity1 = restTemplate
-                .getForEntity("http://mysqldb:8083/api/Movies/" + user.getMovieId(),
+                .getForEntity("http://movie-service:8083/api/Movies/" + user.getMovieId(),
                 MovieDto.class);
 
         DepartmentDto departmentDto = responseEntity.getBody();
