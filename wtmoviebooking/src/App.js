@@ -18,7 +18,7 @@ import { useState, useEffect } from 'react';
 import Register from './components/pages/Register';
 import Loginmain from './components/Loginmain';
 import Reservation from './components/pages/Reservation';
-
+import Reservationtwo from './components/pages/Reservationtwo';
 // import { Route } from 'react-router-dom';
 
 function App() {
@@ -54,7 +54,7 @@ function App() {
         <Route path="/theatre" element={<Theatre />} />
         <Route path="/tpage" element={<Tpage />} />
         <Route path="/reservation" element={<Reservation />} />
-
+<Route path="/resvtw" element={<Reservationtwo />} />
       </Routes>
 
 

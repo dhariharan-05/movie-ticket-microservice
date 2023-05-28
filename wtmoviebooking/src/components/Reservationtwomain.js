@@ -13,7 +13,7 @@ import { WidthFull } from "@mui/icons-material";
 import { ReactSession } from 'react-client-session';
 import { useNavigate } from "react-router-dom";
 
-function Theatremain() {
+function Reservationtwomain() {
 //   const ot = ReactSession.get("original_title")
 //   const pop = ReactSession.get("popularity");
 //   const lan = ReactSession.get("original_language");
@@ -22,9 +22,19 @@ function Theatremain() {
   var [resp, setResp] = useState(false);
   var [movName, setMovName] = useState("");
   const navigate = useNavigate();
-
-
-var movsta;
+  const handleSubmit = (event) => {
+    ReactSession.set("moviename",movName);
+     event.preventDefault();
+     // Perform any desired action with the theaterName value
+     console.log("Submitted theater name:", theaterName);
+     // Reset the input value
+     setTheaterName(theaterName);
+    //  getTheatre();
+ 
+   };
+const handleInputChange = (event) => {
+    setTheaterName(event.target.value);
+  };
   useEffect(() => {
   
    
@@ -72,60 +82,11 @@ Apicalls.CheckMovie(mdetail1)
       });
   
 }, [ReactSession.get("original_title"), ReactSession.get("popularity"), ReactSession.get("original_language")]);
+var movsta;
 
-useEffect(() => {
-  console.log(ReactSession.get("restatus"));
-
-  setResp(ReactSession.get("restatus"));
-
-  console.log(resp);
-}, [resp]);
-
-const handleInputChange = (event) => {
-    setTheaterName(event.target.value);
-  };
-  const handleSubmitTwo = (event) => {
-
- navigate("/resvtw");
-   };
-const handleSubmit = (event) => {
-   ReactSession.set("moviename",movName);
-    event.preventDefault();
-    // Perform any desired action with the theaterName value
-    console.log("Submitted theater name:", theaterName);
-    // Reset the input value
-    setTheaterName(theaterName);
-    getTheatre();
-
-  };
-  const getTheatre= () => {
-    fetch('http://localhost:8082/api/theatres/t/'+ theaterName).then(
-      response => response.json()
-    ).then(data => {
-      console.log(data)
-      var tid = data.id;
-      ReactSession.set("tid",tid);
-      ReactSession.set("theatrename",theaterName);
-      // console.log(verifyEmail);
-      // console.log(emailInput);
-      // console.log(username);
-    navigate("/tpage")
-    }, (e) =>{
-      console.log(e);
-    })
-
-  } 
   return (
     <div style={styles.container}>
-  {resp === "true" ? (
-    <form onSubmit={handleSubmitTwo} style={styles.form}>
-    <p>You already have a reservation!!</p>
-    <br></br>
-    <button type="submit" style={styles.button}>
-        Click here to make another reservation
-      </button>
-      </form>
-  ) : (
+  
     <form onSubmit={handleSubmit} style={styles.form}>
       <label value={movsta}>{movName}</label>
       <input
@@ -139,7 +100,6 @@ const handleSubmit = (event) => {
         Submit
       </button>
     </form>
-  )}
 </div>
 );
 }
@@ -177,4 +137,4 @@ const handleSubmit = (event) => {
   
   
 
-export default Theatremain;
+export default Reservationtwomain;

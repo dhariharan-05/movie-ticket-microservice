@@ -14,13 +14,20 @@ export const Apicalls ={
     GetMid,
     GetUser,
     PutUser,
-    GetSeat
+    GetSeat,
+    PostUser
 }
 function Theatres(tdetail){
     return instance1.post('api/theatres',tdetail,{
         headers: { 'Content-type': 'application/json'}
     })
 }
+function PostUser(udetail){
+  return instance2.post('api/users',udetail,{
+      headers: { 'Content-type': 'application/json'}
+  })
+}
+
  function GetSeat(udetail){
   return instance2.get('api/users/'+udetail.theatreId+'/'+udetail.movieId,{
     //   params: mdetail1,

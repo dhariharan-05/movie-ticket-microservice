@@ -39,6 +39,7 @@ const navigate = useNavigate();
   var tid=ReactSession.get("tid");
   var email=ReactSession.get("email");
   var movienam= ReactSession.get("moviename")
+  var moviefromWeb= ReactSession.get("moviefromWeb")
 var [movId,setMovieid] = useState("");
 var [seat,setSeat] = useState("");
 //   var mid=ReactSession.get("mid");
@@ -55,6 +56,7 @@ var [seat,setSeat] = useState("");
          setMovieid(response.data.id);
          ReactSession.set("movieId", response.data.id);         
          console.log(movId);
+         console.log(moviefromWeb);
         // console.log(movId); // Assuming the response has a boolean field indicating if the movie exists
         })
       .catch(error => {
@@ -62,7 +64,7 @@ var [seat,setSeat] = useState("");
       });
       const udetail = {
         id: ReactSession.get("id"),
-        movieId: ReactSession.get("movieId"),
+        movieId: moviefromWeb,
         theatreId: ReactSession.get("tid"),
       }
   // Apicalls.GetUser(udetail)
@@ -77,6 +79,7 @@ var [seat,setSeat] = useState("");
       const combinedSeats = "[" + seatArray.join(',') + "]"; // Combine seat information into a single string separated by commas and enclosed in square brackets
       console.log(combinedSeats); // Display the combined seats string
       setSeat(combinedSeats);
+      console.log(udetail.movieId);
     })
     },[]);
 
