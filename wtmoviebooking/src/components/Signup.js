@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { Apicalls } from './Apicalls';
+import { useNavigate } from 'react-router-dom';
 
 // Material UI Imports
 import {
@@ -20,7 +22,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LoginIcon from "@mui/icons-material/Login";
 import { Link } from "react-router-dom";
 import Loginmain from "./Loginmain";
-
+import { ReactSession } from "react-client-session";
 // Validations
 
 //Email Validation
@@ -34,11 +36,12 @@ export default function SignUp() {
   const [usernameInput, setUsernameInput] = useState();
   const [emailInput, setEmailInput] = useState();
   const [passwordInput, setPasswordInput] = useState();
-
+ var [sucessful, setSuccessful] = useState();
   // Inputs Errors
   const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const navigate = useNavigate();
 
   // Overall Form Validity
   const [formValid, setFormValid] = useState();
@@ -120,11 +123,36 @@ export default function SignUp() {
     console.log("Username : " + usernameInput);
     console.log("Email : " + emailInput);
     console.log("Password : " + passwordInput);
-
+    postUser();
     //Show Successfull Submittion
-    setSuccess("Form Submitted Successfully");
-  };
+  
 
+  };
+const postUser = () => {
+  const udetail1 = {
+    name: usernameInput,
+    email: emailInput,
+    password: passwordInput
+  }
+  Apicalls.PostUser(udetail1)
+  .then((response) => {
+    console.log("response success");
+    setSuccessful("true");
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+};
+useEffect(() => {
+  if (sucessful) {
+    const timer = setTimeout(() => {
+      navigate("/login"); // Redirect to '/movies' after 2 seconds
+    }, 2000);
+
+    return () => clearTimeout(timer); // Clear the timer on component unmount
+  }
+}, [sucessful, navigate]);
   return (
     <div style={{width: "350px",padding:"10px",margin:"auto"}}>
       <div style={{ marginTop: "10px" }}>
@@ -212,7 +240,11 @@ export default function SignUp() {
           </Alert>
         </Stack>
       )}
-
+{sucessful &&
+          <Alert severity="success" size="small">
+          Registration success! Redirecting to login .. 
+          </Alert>
+        }
       {/* Show Success if no issues */}
       {success && (
         <Stack sx={{ width: "100%", paddingTop: "10px" }} spacing={2}>
