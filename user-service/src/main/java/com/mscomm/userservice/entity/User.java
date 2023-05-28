@@ -18,7 +18,7 @@ public class User {
 	    private String name;
 	    private String password;
 	    private String email;
-	    private String seat ="[E2]";
+	    private String seat ="[]";
 	    private String datetime = "08:00";
 	    private String price = "100";
 	    private String theatreId = "1";
