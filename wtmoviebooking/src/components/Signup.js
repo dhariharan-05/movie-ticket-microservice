@@ -1,160 +1,134 @@
-import React, { useState,useEffect } from "react";
-import { Apicalls } from './Apicalls';
-import { useNavigate } from 'react-router-dom';
-
-// Material UI Imports
-import {
-  TextField,
-  InputAdornment,
-  FormControl,
-  InputLabel,
-  IconButton,
-  Button,
-  Input,
-  Checkbox,
-  Alert,
-  Stack,
-} from "@mui/material";
-
-// Material UI Icon Imports
+import React, { useState, useEffect } from "react";
+import { Apicalls } from "./Apicalls";
+import { useNavigate } from "react-router-dom";
+import { TextField, InputAdornment, FormControl, InputLabel, IconButton, Button, Input, Checkbox, Stack, Snackbar } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
+import { Alert } from "@mui/material";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LoginIcon from "@mui/icons-material/Login";
 import { Link } from "react-router-dom";
 import Loginmain from "./Loginmain";
 import { ReactSession } from "react-client-session";
-// Validations
 
-//Email Validation
-const isEmail = (email) =>
-  /[\s\S]*/i.test(email);
+const isEmail = (email) => /[\s\S]*/i.test(email);
 
 export default function SignUp() {
-  const [showPassword, setShowPassword] = React.useState(false);
-
-  //Inputs
+  const [showPassword, setShowPassword] = useState(false);
   const [usernameInput, setUsernameInput] = useState();
   const [emailInput, setEmailInput] = useState();
   const [passwordInput, setPasswordInput] = useState();
- var [sucessful, setSuccessful] = useState();
-  // Inputs Errors
+  const [sucessful, setSuccessful] = useState(false);
+  const [ids, setIds] = useState();
   const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const navigate = useNavigate();
+  const [formValid, setFormValid] = useState(null);
 
-  // Overall Form Validity
-  const [formValid, setFormValid] = useState();
-  const [success, setSuccess] = useState();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
-  // Handles Display and Hide Password
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
-  // Label for Checkbox
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
- // Validation for onBlur Username
   const handleUsername = () => {
     if (!usernameInput) {
       setUsernameError(true);
       return;
     }
-
     setUsernameError(false);
   };
 
- // Validation for onBlur Email
   const handleEmail = () => {
-    console.log(isEmail(emailInput));
     if (!isEmail(emailInput)) {
       setEmailError(true);
       return;
     }
-  
     setEmailError(false);
   };
 
-  // Validation for onBlur Password
   const handlePassword = () => {
-    if (
-      !passwordInput ||
-      passwordInput.length < 5 ||
-      passwordInput.length > 20
-    ) {
+    if (!passwordInput || passwordInput.length < 5 || passwordInput.length > 20) {
       setPasswordError(true);
       return;
     }
-
     setPasswordError(false);
   };
 
-  //handle Submittion
   const handleSubmit = () => {
-    setSuccess(null);
-    //First of all Check for Errors
-
-    // IF username error is true
-    if (usernameError || !usernameInput) {
-      setFormValid(
-        "Username is set btw 5 - 15 characters long. Please Re-Enter"
-      );
-      return;
-    }
-
-    // If Email error is true
-    if (emailError || !emailInput) {
-      setFormValid("Email is Invalid. Please Re-Enter");
-      return;
-    }
-
-    // If Password error is true
-    if (passwordError || !passwordInput) {
-      setFormValid(
-        "Password is set btw 5 - 20 characters long. Please Re-Enter"
-      );
-      return;
-    }
     setFormValid(null);
 
-    // Proceed to use the information passed
-    console.log("Username : " + usernameInput);
-    console.log("Email : " + emailInput);
-    console.log("Password : " + passwordInput);
+    if (usernameError || !usernameInput) {
+      setFormValid("Username is set between 5 - 15 characters long. Please re-enter.");
+      return;
+    }
+
+    if (emailError || !emailInput) {
+      setFormValid("Email is invalid. Please re-enter.");
+      return;
+    }
+
+    if (passwordError || !passwordInput) {
+      setFormValid("Password is set between 5 - 20 characters long. Please re-enter.");
+      return;
+    }
+
+    setFormValid(null);
+
+    console.log("Username: " + usernameInput);
+    console.log("Email: " + emailInput);
+    console.log("Password: " + passwordInput);
     postUser();
-    //Show Successfull Submittion
-  
-
   };
-const postUser = () => {
-  const udetail1 = {
-    name: usernameInput,
-    email: emailInput,
-    password: passwordInput
-  }
-  Apicalls.PostUser(udetail1)
-  .then((response) => {
-    console.log("response success");
-    setSuccessful("true");
-  })
-  .catch((error) => {
-    console.error(error);
-  });
 
-};
-useEffect(() => {
-  if (sucessful) {
-    const timer = setTimeout(() => {
-      navigate("/login"); // Redirect to '/movies' after 2 seconds
-    }, 2000);
+  const postUser = () => {
+    const udetail1 = {
+      name: usernameInput,
+      email: emailInput,
+      password: passwordInput
+    };
 
-    return () => clearTimeout(timer); // Clear the timer on component unmount
-  }
-}, [sucessful, navigate]);
+    Apicalls.PostUser(udetail1)
+      .then((response) => {
+        console.log("response success");
+        setSuccessful(true);
+        console.log(response);
+        setIds(response.data.id);
+        showSnackbar("Registration success! Redirecting to login..", "success");
+      })
+      .catch((error) => {
+        console.error(error);
+        showSnackbar("Registration failed. Please try again.", "error");
+      });
+  };
+
+  useEffect(() => {
+    if (sucessful) {
+      const timer = setTimeout(() => {
+        navigate("/login"); // Redirect to '/login' after 2 seconds
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [sucessful, navigate]);
+
+  const showSnackbar = (message, severity) => {
+    setSnackbarMessage(message);
+    setSnackbarSeverity(severity);
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
   return (
-    <div style={{width: "350px",padding:"10px",margin:"auto"}}>
+    <div style={{ width: "350px", padding: "10px", margin: "auto" }}>
       <div style={{ marginTop: "10px" }}>
         <TextField
           error={usernameError}
@@ -189,12 +163,10 @@ useEffect(() => {
           }}
         />
       </div>
+
       <div style={{ marginTop: "5px" }}>
         <FormControl sx={{ width: "100%" }} variant="standard">
-          <InputLabel
-            error={passwordError}
-            htmlFor="standard-adornment-password"
-          >
+          <InputLabel error={passwordError} htmlFor="standard-adornment-password">
             Password
           </InputLabel>
           <Input
@@ -222,42 +194,36 @@ useEffect(() => {
       </div>
 
       <div style={{ marginTop: "10px" }}>
-        <Button
-          variant="contained"
-          fullWidth
-          startIcon={<LoginIcon />}
-          onClick={handleSubmit}
-        >
+        <Button variant="contained" fullWidth startIcon={<LoginIcon />} onClick={handleSubmit}>
           LOGIN
         </Button>
       </div>
 
-      {/* Show Form Error if any */}
       {formValid && (
         <Stack sx={{ width: "100%", paddingTop: "10px" }} spacing={2}>
-          <Alert severity="error" size="small">
-            {formValid}
-          </Alert>
+          <Snackbar open={true} autoHideDuration={6000} onClose={handleSnackbarClose}>
+            <Alert severity="error" size="small">
+              {formValid}
+            </Alert>
+          </Snackbar>
         </Stack>
       )}
-{sucessful &&
-          <Alert severity="success" size="small">
-          Registration success! Redirecting to login .. 
-          </Alert>
-        }
-      {/* Show Success if no issues */}
-      {success && (
+
+      {sucessful && (
         <Stack sx={{ width: "100%", paddingTop: "10px" }} spacing={2}>
-          <Alert severity="success" size="small">
-            {success}
-          </Alert>
+          <Snackbar open={true} onClose={handleSnackbarClose}>
+            <Alert severity="success" size="small">
+              Registration success! Redirecting to login..
+              <br />
+              Note this id: {ids}
+            </Alert>
+          </Snackbar>
         </Stack>
       )}
 
       <div style={{ marginTop: "7px", fontSize: "15px" }} margin="left">
-        {/* <a>Forgot Password</a> */}
         <br />
-        Do you have an account ?{" "}
+        Do you have an account?{" "}
         <Link style={{ textDecoration: "underline", color: "blue" }} to="/login">
           Log In
         </Link>

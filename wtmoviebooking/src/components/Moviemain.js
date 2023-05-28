@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Grid, Toolbar,  FormControl, InputLabel, Select, MenuItem} from "@mui/material";
+import { Container, Grid, Toolbar,  FormControl, InputLabel, Select, MenuItem,Button, colors} from "@mui/material";
 import MovieCards from "./MovieCards";
 import { Apicalls } from "./Apicalls";
 import { Link } from "react-router-dom";
@@ -111,8 +111,11 @@ console.log(usern);
 <Container>
 {resp === "true" && usern !==null ? (
   <div>
+    <br></br>
    <ToastContainer />
-      <Link to="/reservation">Check your reservations</Link>
+   
+    <Button variant="contained" color="primary" onClick={() => navigate("/reservation")}>
+Check your reservations</Button>
       </div>
     ) : null}
   

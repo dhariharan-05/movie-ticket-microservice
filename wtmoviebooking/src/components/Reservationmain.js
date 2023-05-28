@@ -141,7 +141,7 @@ function Reservationmain() {
                   {({ blob, url, loading, error }) => (
                     <>
                       <button onClick={handleDownload} style={styles.downloadButton}>
-                        {loading ? 'Loading document...' : 'Download PDF'}
+                        {loading ? 'Loading document...' : 'Download Ticket'}
                       </button>
                       <ToastContainer />
                     </>
