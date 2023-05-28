@@ -12,6 +12,7 @@ import Signup from "./Signup";
 import { WidthFull } from "@mui/icons-material";
 import { ReactSession } from 'react-client-session';
 import { useNavigate } from "react-router-dom";
+import { responsiveFontSizes } from "@mui/material";
 
 function Reservationtwomain() {
 //   const ot = ReactSession.get("original_title")
@@ -19,24 +20,22 @@ function Reservationtwomain() {
 //   const lan = ReactSession.get("original_language");
   const[movies,setMovies]=useState(false);
   const [theaterName, setTheaterName] = useState("");
+  var [newid, setNewid] = useState("");
+  var [name, setName] = useState("");
+  var [email, setEmail] = useState("");
+  var [password, setPassword] = useState("");
   var [resp, setResp] = useState(false);
   var [movName, setMovName] = useState("");
   const navigate = useNavigate();
-  const handleSubmit = (event) => {
-    ReactSession.set("moviename",movName);
-     event.preventDefault();
-     // Perform any desired action with the theaterName value
-     console.log("Submitted theater name:", theaterName);
-     // Reset the input value
-     setTheaterName(theaterName);
-    //  getTheatre();
- 
-   };
+  const [isClicked, setIsClicked] = useState(false);
+
 const handleInputChange = (event) => {
     setTheaterName(event.target.value);
   };
   useEffect(() => {
-  
+  setEmail(ReactSession.get("email"));
+  setPassword(ReactSession.get("password"))
+  setName(ReactSession.get("username"))
    
     const mdetail = {
         movieName: ReactSession.get("original_title"),
@@ -83,21 +82,55 @@ Apicalls.CheckMovie(mdetail1)
   
 }, [ReactSession.get("original_title"), ReactSession.get("popularity"), ReactSession.get("original_language")]);
 var movsta;
+const handleSubmit = (event) => {
+    ReactSession.set("moviename",movName);
+     event.preventDefault();
+     // Perform any desired action with the theaterName value
+     console.log("Submitted theater name:", theaterName);
+     // Reset the input value
+     setTheaterName(theaterName);
+    
+     postUser();
+     setIsClicked(true);
+   };
+   const postUser= () =>{
+  console.log(password);
+  console.log(email);
+  console.log(name);
+   const udetail1={
+    name:name,
+    password:password,
+    email:email
+   }
+   Apicalls.PostUser(udetail1)
+   .then(response => {
+    console.log(response.data.id);
+    setNewid(response.data.id);
+   })
+   .catch(error => {
+    console.error(error);
+   })
 
+   }
   return (
     <div style={styles.container}>
   
     <form onSubmit={handleSubmit} style={styles.form}>
-      <label value={movsta}>{movName}</label>
-      <input
+    <label>
+        {isClicked ? (
+          `Temporary Registration ID: ${newid}`
+        ) : (
+          'Click submit to generate a new temporary reservation ID using which you can login again and make reservations using the same credentials.'
+        )}
+      </label>      {/* <input
         type="text"
         value={theaterName}
         onChange={handleInputChange}
         placeholder="Enter theater name"
         style={styles.input}
-      />
-      <button type="submit" style={styles.button}>
-        Submit
+      /> */}
+      <button type="submit" style={{ ...styles.button, opacity: isClicked ? 0.5 : 1 }} disabled={isClicked}>
+        Click here
       </button>
     </form>
 </div>

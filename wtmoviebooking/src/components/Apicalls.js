@@ -22,8 +22,8 @@ function Theatres(tdetail){
         headers: { 'Content-type': 'application/json'}
     })
 }
-function PostUser(udetail){
-  return instance2.post('api/users',udetail,{
+function PostUser(udetail1){
+  return instance2.post('api/users',udetail1,{
       headers: { 'Content-type': 'application/json'}
   })
 }
