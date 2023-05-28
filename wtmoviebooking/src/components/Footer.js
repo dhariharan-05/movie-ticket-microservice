@@ -29,9 +29,9 @@ function Footer() {
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
             <h2>Done By</h2>
-            <Link to='/'>Karthik Raj</Link>
-            <Link to='/'>Vigneshe</Link>
-            <Link to='/'>Hariharan Dhanapathy</Link>
+            <Link to='https://github.com/Karthikoffi'>Karthik Raj</Link>
+            <Link to='https://github.com/vicky008official'>Vigneshe</Link>
+            <Link to='https://github.com/hariharanPTU'>Hariharan Dhanapathy</Link>
           </div>
           <div class='footer-link-items'>
             <h2>Contact Us</h2>

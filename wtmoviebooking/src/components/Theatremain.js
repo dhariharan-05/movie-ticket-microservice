@@ -20,12 +20,15 @@ function Theatremain() {
 //   const lan = ReactSession.get("original_language");
   const[movies,setMovies]=useState(false);
   const [theaterName, setTheaterName] = useState("");
+  var [resp, setResp] = useState(false);
   var [movName, setMovName] = useState("");
   const navigate = useNavigate();
 
 
 var movsta;
   useEffect(() => {
+  
+   
     const mdetail = {
         movieName: ReactSession.get("original_title"),
         cbfcrating: ReactSession.get("popularity"),
@@ -48,7 +51,7 @@ Apicalls.CheckMovie(mdetail1)
       
         setMovName(mdetail.movieName);
         console.log(movieExists); // Assuming the response has a boolean field indicating if the movie exists
-        if (!movieExists) {
+                if (!movieExists) {
           // Movie details are not present in the database, add them
           Apicalls.Movies(mdetail)
             .then(() => {
@@ -57,6 +60,7 @@ Apicalls.CheckMovie(mdetail1)
             .catch(error => {
               console.error(error);
             });
+        
         } else {
           // Movie details are already present in the database
           setMovies(true);
@@ -65,7 +69,22 @@ Apicalls.CheckMovie(mdetail1)
       .catch(error => {
         console.error(error);
       });
+  
 }, [ReactSession.get("original_title"), ReactSession.get("popularity"), ReactSession.get("original_language")]);
+
+useEffect(() => {
+  console.log(ReactSession.get("restatus"));
+
+  setResp(ReactSession.get("restatus"));
+
+  console.log(resp);
+}, [resp]);
+
+
+
+
+
+
 
 //   Apicalls.Theatres(tdetail).then(response=> {
 //     setTheatres(true)
@@ -104,6 +123,10 @@ Apicalls.CheckMovie(mdetail1)
 const handleInputChange = (event) => {
     setTheaterName(event.target.value);
   };
+  const handleSubmitTwo = (event) => {
+
+ navigate("/newresv");
+   };
 const handleSubmit = (event) => {
    ReactSession.set("moviename",movName);
     event.preventDefault();
@@ -132,10 +155,16 @@ const handleSubmit = (event) => {
 
   } 
   return (
-    
-    
     <div style={styles.container}>
-       
+  {resp === "true" ? (
+    <form onSubmit={handleSubmitTwo} style={styles.form}>
+    <p>You already have a reservation!!</p>
+    <br></br>
+    <button type="submit" style={styles.button}>
+        Click here to make another reservation
+      </button>
+      </form>
+  ) : (
     <form onSubmit={handleSubmit} style={styles.form}>
       <label value={movsta}>{movName}</label>
       <input
@@ -145,11 +174,13 @@ const handleSubmit = (event) => {
         placeholder="Enter theater name"
         style={styles.input}
       />
-      <button type="submit" style={styles.button} >
+      <button type="submit" style={styles.button}>
         Submit
       </button>
     </form>
-  </div>);
+  )}
+</div>
+);
 }
   const styles = {
     container: {
