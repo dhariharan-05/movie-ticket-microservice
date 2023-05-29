@@ -104,9 +104,9 @@ function Reservationmain() {
             <Text style={styles.detailText}>Movie ID: {data.user.movieId}</Text>
             <Text style={styles.detailText}>Movie Name: {data.movie.movieName}</Text>
             <Text style={styles.detailText}>Name: {data.user.name}</Text>
-            <Text style={styles.detailText}>Password: {data.user.password}</Text>
+            
             <Text style={styles.detailText}>Price: {data.user.price}</Text>
-            <Text style={styles.detailText}>Booked Status: {data.user.restatus}</Text>
+           
             <Text style={styles.detailText}>Seat: {data.user.seat}</Text>
             <Text style={styles.detailText}>Theatre ID: {data.user.theatreId}</Text>
             <Text style={styles.detailText}>Theatre Name: {data.department.theatreName}</Text>
@@ -131,9 +131,9 @@ function Reservationmain() {
                 <p>Movie ID: {data.user.movieId}</p>
                 <p>Movie Name: {data.movie.movieName}</p>
                 <p>Name: {data.user.name}</p>
-                <p>Password: {data.user.password}</p>
+                
                 <p>Price: {data.user.price}</p>
-                <p>Booked Status: {data.user.restatus}</p>
+                
                 <p>Seat: {data.user.seat}</p>
                 <p>Theatre ID: {data.user.theatreId}</p>
                 <p>Theatre Name: {data.department.theatreName}</p>
