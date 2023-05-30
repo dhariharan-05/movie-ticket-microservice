@@ -29,7 +29,7 @@ function PostUser(udetail1){
 }
 
  function GetSeat(udetail){
-  return instance2.get('api/users/'+udetail.theatreId+'/'+udetail.movieId,{
+  return instance2.get('api/users/'+udetail.theatreId+'/'+udetail.movieId+'/'+udetail.datetime,{
     //   params: mdetail1,
       headers: { 'Content-type': 'application/json' }
     });

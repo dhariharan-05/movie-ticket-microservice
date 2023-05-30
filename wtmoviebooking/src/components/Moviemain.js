@@ -10,6 +10,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Moviemain(){
+  const [restatus, setRestatus] = useState(null);
+
   var re1;
   const navigate = useNavigate();
 var usern = ReactSession.get("username");
@@ -85,7 +87,7 @@ console.log(usern);
       position: toast.POSITION.BOTTOM_RIGHT,
       // Additional options for the toast notification
     });
-  }, []);
+  }, [resp]);
 
 // useEffect(() => {
 //     (region =='India' ? getData() : getGData())
@@ -116,6 +118,9 @@ console.log(usern);
    
     <Button variant="contained" color="primary" onClick={() => navigate("/reservation")}>
 Check your reservations</Button>
+
+<Button variant="contained" color="primary" style={{ marginLeft: '10px' }} onClick={() => navigate("/cancelresv")}>
+Cancel your reservation</Button>
       </div>
     ) : null}
   

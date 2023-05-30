@@ -57,12 +57,16 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = mapToUser(user);
         
         ResponseEntity<DepartmentDto> responseEntity = restTemplate
-                .getForEntity("http://department-service:8082/api/theatres/" + user.getTheatreId(),
-                DepartmentDto.class);
+//                .getForEntity("http://department-service:8082/api/theatres/" + user.getTheatreId(),
+                .getForEntity("http://localhost:8082/api/theatres/" + user.getTheatreId(),
+
+        		DepartmentDto.class);
 
         ResponseEntity<MovieDto> responseEntity1 = restTemplate
-                .getForEntity("http://movie-service:8083/api/Movies/" + user.getMovieId(),
-                MovieDto.class);
+//                .getForEntity("http://movie-service:8083/api/Movies/" + user.getMovieId(),
+                .getForEntity("http://localhost:8083/api/Movies/" + user.getMovieId(),
+
+        		MovieDto.class);
 
         DepartmentDto departmentDto = responseEntity.getBody();
         MovieDto movieDto = responseEntity1.getBody();
@@ -90,6 +94,12 @@ public class UserServiceImpl implements UserService {
 		
 	    return userRepository.findByTheatreIdAndMovieId(theatreId, movieId);
 	}
+	@Override
+	public List<User> getByTheatreIdAndMovieIdAndDatetime(String theatreId, String movieId, String datetime) {
+		String restatus = "true";
+	    return userRepository.findByTheatreIdAndMovieIdAndRestatusAndDatetime(theatreId, movieId, restatus, datetime);
+	}    
+
 	
 	private UserDto mapToUser(User user){
         UserDto userDto = new UserDto();

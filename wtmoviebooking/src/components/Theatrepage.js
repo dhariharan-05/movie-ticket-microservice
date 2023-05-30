@@ -42,6 +42,7 @@ const navigate = useNavigate();
   var moviefromWeb= ReactSession.get("moviefromWeb")
 var [movId,setMovieid] = useState("");
 var [seat,setSeat] = useState("");
+var [unavailableSeats, setUnavailableSeats] = useState([]);
 //   var mid=ReactSession.get("mid");
 
  useEffect(() =>{
@@ -113,16 +114,41 @@ const handleSeatClick = (seat) => {
 };
 
 const handleDateChange = (event) => {
-  setShowDate(event.target.value);
+  const newDate = event.target.value;
+  setShowDate(newDate);
+ getUnavailableSeats(newDate);
 };
 const handleTimeChange = (event) => {
   setShowTime(event.target.value);
 };
+const getUnavailableSeats = (date) => {
+    const udetail = {
+      id: ReactSession.get("id"),
+      movieId: ReactSession.get("moviefromWeb"),
+      theatreId: ReactSession.get("tid"),
+      datetime: date
+    };
+
+    Apicalls.GetSeat(udetail)
+      .then(response => {
+        const responseData = response.data;
+        const seatArray = responseData.map((item) => item.body.seat.replace(/[\[\]]+/g, ''));
+        const combinedSeats = "[" + seatArray.join(',') + "]";
+        setUnavailableSeats(combinedSeats);
+        console.log(combinedSeats);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+ useEffect(() => {
+    getUnavailableSeats(showDate);
+  }, [showDate]);
 
 const numRows = 10; // Number of rows
 const numColumns = 10; // Number of columns
 const seatPrice = 100; // Price per seat
-const unavailableSeats = seat; // Example of unavailable seats
+// unavailableSeats = seat; // Example of unavailable seats
 const [updateSuccess, setUpdateSuccess] = useState(false); // State variable for update success
 const renderSeats = () => {
   const seats = [];

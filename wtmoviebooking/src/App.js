@@ -19,6 +19,7 @@ import Register from './components/pages/Register';
 import Loginmain from './components/Loginmain';
 import Reservation from './components/pages/Reservation';
 import Reservationtwo from './components/pages/Reservationtwo';
+import Cancelresv from './components/pages/Cancelresv';
 // import { Route } from 'react-router-dom';
 
 function App() {
@@ -55,6 +56,8 @@ function App() {
         <Route path="/tpage" element={<Tpage />} />
         <Route path="/reservation" element={<Reservation />} />
 <Route path="/resvtw" element={<Reservationtwo />} />
+<Route path="/cancelresv" element={<Cancelresv />} />
+
       </Routes>
 
 

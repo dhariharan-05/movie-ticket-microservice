@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/users")
 @AllArgsConstructor
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="*")
 public class UserController {
 	  private UserService userService;
 
@@ -32,6 +32,18 @@ public class UserController {
 	    @GetMapping("/{tid}/{mid}")
 	    public List<ResponseEntity<User>> getUser(@PathVariable("tid") String theatreId, @PathVariable("mid") String movieId) {
 	        List<User> users = userService.getByTheatreIdAndMovieId(theatreId, movieId);
+
+	        List<ResponseEntity<User>> responseEntities = new ArrayList<>();
+
+	        for (User user : users) {
+	            responseEntities.add(ResponseEntity.ok(user));
+	        }
+
+	        return responseEntities;
+	    }
+	    @GetMapping("/{tid}/{mid}/{date}")
+	    public List<ResponseEntity<User>> getUserByDetails(@PathVariable("tid") String theatreId, @PathVariable("mid") String movieId,  @PathVariable("date") String datetime) {
+	        List<User> users = userService.getByTheatreIdAndMovieIdAndDatetime(theatreId, movieId, datetime);
 
 	        List<ResponseEntity<User>> responseEntities = new ArrayList<>();
 

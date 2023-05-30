@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("api/Movies")
 @AllArgsConstructor
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="*")
 public class DepartmentController {
 
 	private DepartmentService departmentService;

@@ -9,6 +9,8 @@ public interface UserService {
     User getUserById(Long userId);
     ResponseDto getUser(Long userId);
     List<User> getByTheatreIdAndMovieId(String theatreId, String movieId);
+    List<User> getByTheatreIdAndMovieIdAndDatetime(String theatreId, String movieId, String datetime);
+
 
 //    ResponseDto getUserByName(String userName);
 }
