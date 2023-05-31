@@ -8,6 +8,7 @@ public interface UserService {
 	User saveUser(User user);
     User getUserById(Long userId);
     ResponseDto getUser(Long userId);
+    User getUserByIdWithLock(Long id);
     List<User> getByTheatreIdAndMovieId(String theatreId, String movieId);
     List<User> getByTheatreIdAndMovieIdAndDatetime(String theatreId, String movieId, String datetime);
 

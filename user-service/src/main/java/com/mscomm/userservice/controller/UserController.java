@@ -54,9 +54,9 @@ public class UserController {
 	        return responseEntities;
 	    }
 
-	    @PutMapping("{id}")
+	    @PutMapping("/{id}")
 	    public ResponseEntity<User> updateUser(@PathVariable("id") Long userId, @RequestBody User updatedUser) {
-	        User user = userService.getUserById(userId);
+	        User user = userService.getUserByIdWithLock(userId);
 	        
 	        if (user == null) {
 	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);

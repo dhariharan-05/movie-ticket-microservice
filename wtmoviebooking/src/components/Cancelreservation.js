@@ -13,10 +13,14 @@ import { WidthFull } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import Cancelresv from "./pages/Cancelresv";
 import { ReactSession } from 'react-client-session';
-
+import {
+    Alert,
+    Stack,
+  } from "@mui/material";
 import { Container, Grid, Toolbar,  FormControl, InputLabel, Select, MenuItem,Button, colors} from "@mui/material";
 function CancelReservation() {
     const [isConfirming, setIsConfirming] = useState(false);
+    const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
     var ids=ReactSession.get("id");
     var password=ReactSession.get("password");
@@ -29,7 +33,6 @@ function CancelReservation() {
       if (isConfirming) {
         performCancellation();
         console.log('Reservation canceled');
-        navigate("/movies");
       } else {
         setIsConfirming(true);
       }
@@ -46,6 +49,7 @@ function CancelReservation() {
     .then(() => {
      console.log("cancelled successfully")
      var f = "false";
+     setSuccess(true);
      ReactSession.set("restatus",f)// Set the update success state to true
    
     })
@@ -53,6 +57,15 @@ function CancelReservation() {
      console.error(error);
     })
   }
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => {
+        navigate("/movies"); // Redirect to '/movies' after 2 seconds
+      }, 2000);
+  
+      return () => clearTimeout(timer); // Clear the timer on component unmount
+    }
+  }, [success, navigate]);
     const handleCancelConfirmation = () => {
       setIsConfirming(false);
       navigate("/movies")
@@ -60,6 +73,11 @@ function CancelReservation() {
   
     return (
       <div>
+        {success &&
+          <Alert severity="success" size="small">
+           Cancellation success! Redirecting to movies .. 
+          </Alert>
+        }
         {isConfirming ? (
  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>            <p style={{ marginRight: '10px' }}>Are you sure you want to cancel the reservation? </p>
             <Button variant="contained" color="primary" onClick={handleCancelConfirmation}>
@@ -68,6 +86,7 @@ function CancelReservation() {
             <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }} onClick={handleCancel}>
               Yes, cancel the reservation
             </Button>
+            
           </div>
         ) : (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>  

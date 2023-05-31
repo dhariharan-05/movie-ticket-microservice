@@ -2,12 +2,17 @@ package com.mscomm.userservice.service.impl;
 import com.mscomm.userservice.dto.ResponseDto;
 import com.mscomm.userservice.entity.User;
 import com.mscomm.userservice.service.*;
+
+import jakarta.persistence.LockModeType;
+
 import com.mscomm.userservice.repository.*;
 import org.springframework.web.client.RestTemplate;
 import com.mscomm.userservice.dto.*;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,9 +20,12 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 
 public class UserServiceImpl implements UserService {
-
+	 private static boolean isExecuting = false;
+	    private final Lock lock = new ReentrantLock();
 	 private UserRepository userRepository;
 	    private RestTemplate restTemplate;
+		 private CustomPostRepositoryImpl cpr;
+
 	@Override
 	public User saveUser(User user) {
 		return userRepository.save(user);
@@ -88,6 +96,40 @@ public class UserServiceImpl implements UserService {
 
         return user;
 	}
+	@Override
+	public User getUserByIdWithLock(Long id) {
+        LockModeType lockMode = LockModeType.PESSIMISTIC_WRITE; // Choose the appropriate lock mode
+
+        // Acquiring the lock
+        boolean lockAcquired = lock.tryLock();
+        if (!lockAcquired) {
+            throw new IllegalStateException("Another thread is already executing.");
+        }
+
+        try {
+            System.out.println("Acquiring lock for User with ID: " + id);
+            User user = cpr.findByIdAndLock(id, lockMode);
+            System.out.println("Lock acquired for User with ID: " + id);
+
+            try {
+                // Introduce a delay to hold the lock
+                System.out.println("Please wait..."); // Print "Please wait" message
+                Thread.sleep(500); // Delay of 5 seconds
+                // Perform any desired operations while the lock is held
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Releasing the lock
+            System.out.println("Releasing lock for User with ID: " + id);
+            // Release the lock by either committing or rolling back the transaction
+
+            return user;
+        } finally {
+            lock.unlock();
+        }
+    }
+
 	
 	@Override
 	public List<User> getByTheatreIdAndMovieId(String theatreId, String movieId) {
