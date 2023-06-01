@@ -57,9 +57,15 @@ Apicalls.CheckMovie(mdetail1)
           Apicalls.Movies(mdetail)
             .then(() => {
               setMovies(true);
+              // const moviefromWeb = response.data.id;
+              // console.log(moviefromWeb);
+              // ReactSession.set("moviefromWeb",moviefromWeb);
+
+
             })
             .catch(error => {
               console.error(error);
+
             });
         
         } else {
@@ -89,6 +95,9 @@ const handleInputChange = (event) => {
  navigate("/resvtw");
    };
 const handleSubmit = (event) => {
+  const ol = ReactSession.get("original_language");
+  const ve= ReactSession.get("verify");
+  if(ol === false && ve === true){
    ReactSession.set("moviename",movName);
     event.preventDefault();
     // Perform any desired action with the theaterName value
@@ -96,6 +105,17 @@ const handleSubmit = (event) => {
     // Reset the input value
     setTheaterName(theaterName);
     getTheatre();
+  }
+  else{
+    ReactSession.set("moviename",movName);
+    event.preventDefault();
+    // Perform any desired action with the theaterName value
+    console.log("Submitted theater name:", theaterName);
+    // Reset the input value
+    setTheaterName(theaterName);
+    getTheatreVerify();
+    // navigate("/verify");
+  }
 
   };
   const getTheatre= () => {
@@ -112,8 +132,25 @@ const handleSubmit = (event) => {
     navigate("/tpage")
     }, (e) =>{
       console.log(e);
-    })
+    })}
+    const getTheatreVerify= () => {
+      fetch('http://localhost:8082/api/theatres/t/'+ theaterName).then(
+        response => response.json()
+      ).then(data => {
+        console.log(data)
+        var tid = data.id;
+        ReactSession.set("tid",tid);
+        ReactSession.set("theatrename",theaterName);
+        // console.log(verifyEmail);
+        // console.log(emailInput);
+        // console.log(username);
+        console.log("verification due.. will be redirected after verification");
 
+      navigate("/verify")
+      }, (e) =>{
+        console.log(e);
+      })
+  
   } 
   return (
     <div style={styles.container}>

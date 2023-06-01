@@ -11,7 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Moviemain(){
   const [restatus, setRestatus] = useState(null);
-
   var re1;
   const navigate = useNavigate();
 var usern = ReactSession.get("username");

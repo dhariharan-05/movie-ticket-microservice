@@ -9,23 +9,40 @@ import { ReactSession } from 'react-client-session';
 import Navbar from '../Navbar';
 import { Apicalls } from '../Apicalls'
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Theatre() {
 //     const TheatreComponent = () => {
   const location = useLocation();
   const passedProps = location.state;
   const[movies,setMovies]=useState(false);
+  const navigate = useNavigate();
+
 console.log(passedProps);
 ReactSession.set("original_title", passedProps.title);
 ReactSession.set("popularity",passedProps.popularity);
-ReactSession.set("original_language",passedProps.original_language);
+ReactSession.set("original_language",passedProps.adult);
 //   // Access the passed props here and use them as needed
 // };
-
+// if (passedProps.adult === "false") {
+//   console.log(passedProps.adult);
+// navigate("/theatre");
+// } else {
+//   navigate("/verify");
+// }
+// const handleRedirect = () => {
+//   if (passedProps.adult === "false") {
+//     navigate("/theatre");
+//   } else {
+//     navigate("/verify");
+//   }
+// }
   return (
     <div> 
       <Navbar />
    <Theatremain />
+   {/* <button onClick={handleRedirect}>Redirect</button> */}
+
    <Footer/>
     </div>
   )

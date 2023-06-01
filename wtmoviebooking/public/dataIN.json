@@ -97,7 +97,7 @@
             "vote_count": 0
         },
         {
-            "adult": false,
+            "adult": true,
             "backdrop_path": "/p5rhqWHA1tIfEgozKnJZpUwOUYJ.jpg",
             "genre_ids": [
                 28,
@@ -266,7 +266,7 @@
             "vote_count": 0
         },
         {
-            "adult": false,
+            "adult": true,
             "backdrop_path": "/mztuu1vZV23HL5DWKb68OTszqyD.jpg",
             "genre_ids": [
                 18,

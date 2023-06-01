@@ -21,6 +21,7 @@ import Reservation from './components/pages/Reservation';
 import Reservationtwo from './components/pages/Reservationtwo';
 import Cancelresv from './components/pages/Cancelresv';
 // import { Route } from 'react-router-dom';
+import Verify from './components/pages/Verify';
 
 function App() {
   ReactSession.setStoreType("localStorage");
@@ -57,6 +58,7 @@ function App() {
         <Route path="/reservation" element={<Reservation />} />
 <Route path="/resvtw" element={<Reservationtwo />} />
 <Route path="/cancelresv" element={<Cancelresv />} />
+<Route path="/verify" element={<Verify />} />
 
       </Routes>
 

@@ -3,7 +3,8 @@ const config= {
     url: {
         API_BASE_URL: 'http://localhost:8081',
         API_BASE_URL1: 'http://localhost:8082',
-        API_BASE_URL2: 'http://localhost:8083'
+        API_BASE_URL2: 'http://localhost:8083',
+        API_BASE_URL3: 'https://apipro1.ocr.space/parse'
     }
 }
 
@@ -15,7 +16,8 @@ export const Apicalls ={
     GetUser,
     PutUser,
     GetSeat,
-    PostUser
+    PostUser,
+    Verify
 }
 function Theatres(tdetail){
     return instance1.post('api/theatres',tdetail,{
@@ -46,6 +48,13 @@ function PutUser(udetail){
   return instance2.put('api/users/'+udetail.id,udetail,{
     headers: { 'Content-type': 'application/json'}
 })
+}
+function Verify(vdetail){
+  return instance3.post('/image',vdetail,{
+    headers: {
+      'apikey': 'OCRK8565898A',
+      'Content-Type': 'multipart/form-data',
+    }})
 }
 function Movies(mdetail){
     return instance.post('api/Movies',mdetail,{
@@ -79,4 +88,7 @@ const instance1 = axios.create({
 })
 const instance2 = axios.create({
   baseURL: config.url.API_BASE_URL
+})
+const instance3 = axios.create({
+  baseURL: config.url.API_BASE_URL3
 })
