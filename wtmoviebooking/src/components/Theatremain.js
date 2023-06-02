@@ -96,8 +96,8 @@ const handleInputChange = (event) => {
    };
 const handleSubmit = (event) => {
   const ol = ReactSession.get("original_language");
-  const ve= ReactSession.get("verify");
-  if(ol === false && ve === true){
+  //const ve= ReactSession.get("verify");
+  if(ol === false){ //&& ve === true){
    ReactSession.set("moviename",movName);
     event.preventDefault();
     // Perform any desired action with the theaterName value
