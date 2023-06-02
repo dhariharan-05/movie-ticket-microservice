@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("api/theatres")
 @AllArgsConstructor
 @CrossOrigin(origins="*")
-public class DepartmentController {
+public class TheatreController {
 
 	private TheatreService departmentService;
 

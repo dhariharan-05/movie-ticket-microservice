@@ -1,3 +1,4 @@
+package com.mscomm.theatreservice;
 //package com.mscomm.departmentservice;
 //
 //import org.junit.jupiter.api.Test;

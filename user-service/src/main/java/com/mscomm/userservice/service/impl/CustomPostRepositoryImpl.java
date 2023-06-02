@@ -11,9 +11,12 @@ import com.mscomm.userservice.repository.*;
 import com.mscomm.userservice.entity.*;
 @Repository
 public class CustomPostRepositoryImpl implements CustomPostRepository{
-    @PersistenceContext
+//    @PersistenceContext
     private EntityManager entityManager;
  
+    public CustomPostRepositoryImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
     @Override
     @Transactional
     public User findByIdAndLock(Long id, LockModeType lockMode) {
