@@ -1,6 +1,7 @@
 package com.mscomm.loyaltyservice.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,14 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mscomm.loyaltyservice.entity.Loyalty;
 import com.mscomm.loyaltyservice.service.LoyaltyService;
+
+
+import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("api/loyalty")
+@AllArgsConstructor
+@CrossOrigin(origins="*")
 public class LoyaltyController {
     private final LoyaltyService loyaltyService;
 
-    public LoyaltyController(LoyaltyService loyaltyService) {
-        this.loyaltyService = loyaltyService;
-    }
 
     @GetMapping("/{userId}")
     public ResponseEntity<Loyalty> getUsersAndAddLoyalty(@PathVariable Long userId) {
