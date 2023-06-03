@@ -38,12 +38,12 @@ public class LoyaltyController {
             return ResponseEntity.ok(coins);
        
     }
-    @PostMapping("/{userId}/updateCoins")
+    @GetMapping("/{userId}/updateCoins")
     public void updateCoins(@PathVariable Long userId) {
         loyaltyService.updateCoins(userId);
     }
 
-@PostMapping("/{userId}/reduceCoins")
+@GetMapping("/{userId}/reduceCoins")
 public void reduceCoins(@PathVariable Long userId) {
     loyaltyService.reduceCoins(userId);
 }
