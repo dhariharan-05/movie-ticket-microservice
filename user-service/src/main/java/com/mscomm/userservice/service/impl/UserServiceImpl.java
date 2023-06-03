@@ -65,14 +65,14 @@ public class UserServiceImpl implements UserService {
         UserDto userDto = mapToUser(user);
         
         ResponseEntity<DepartmentDto> responseEntity = restTemplate
-                .getForEntity("http://theatre-service:8082/api/theatres/" + user.getTheatreId(),
-//                .getForEntity("http://localhost:8082/api/theatres/" + user.getTheatreId(),
+//                .getForEntity("http://theatre-service:8082/api/theatres/" + user.getTheatreId(),
+                .getForEntity("http://localhost:8082/api/theatres/" + user.getTheatreId(),
 
         		DepartmentDto.class);
 
         ResponseEntity<MovieDto> responseEntity1 = restTemplate
-                .getForEntity("http://movie-service:8083/api/Movies/" + user.getMovieId(),
-//                .getForEntity("http://localhost:8083/api/Movies/" + user.getMovieId(),
+//                .getForEntity("http://movie-service:8083/api/Movies/" + user.getMovieId(),
+                .getForEntity("http://localhost:8083/api/Movies/" + user.getMovieId(),
 
         		MovieDto.class);
 
