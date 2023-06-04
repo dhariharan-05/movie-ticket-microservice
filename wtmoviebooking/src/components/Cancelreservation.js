@@ -21,6 +21,8 @@ import { Container, Grid, Toolbar,  FormControl, InputLabel, Select, MenuItem,Bu
 function CancelReservation() {
     const [isConfirming, setIsConfirming] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [finalsuccess, setFinalSuccess] = useState(false);
+
     const navigate = useNavigate();
     var ids=ReactSession.get("id");
     var password=ReactSession.get("password");
@@ -59,13 +61,31 @@ function CancelReservation() {
   }
   useEffect(() => {
     if (success) {
+      const ldetail1={
+        id: ids,
+      }
+      Apicalls.ReduceCoins(ldetail1)
+      .then((response) => {
+        console.log(response.data)
+        ReactSession.set("coins",response.data.coins);
+        ReactSession.set("discountedValue",response.data.discountedvalue);
+     setFinalSuccess(true);
+       })
+       .catch(error => {
+        console.error(error);
+       })
+    }
+  }, [success]);
+  useEffect(() => {
+    if (finalsuccess) {
       const timer = setTimeout(() => {
         navigate("/movies"); // Redirect to '/movies' after 2 seconds
       }, 2000);
   
       return () => clearTimeout(timer); // Clear the timer on component unmount
     }
-  }, [success, navigate]);
+  }, [finalsuccess, navigate]);
+
     const handleCancelConfirmation = () => {
       setIsConfirming(false);
       navigate("/movies")
@@ -73,7 +93,7 @@ function CancelReservation() {
   
     return (
       <div>
-        {success &&
+        {finalsuccess &&
           <Alert severity="success" size="small">
            Cancellation success! Redirecting to movies .. 
           </Alert>

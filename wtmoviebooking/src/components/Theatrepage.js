@@ -40,6 +40,7 @@ const navigate = useNavigate();
   var email=ReactSession.get("email");
   var movienam= ReactSession.get("moviename")
   var moviefromWeb= ReactSession.get("moviefromWeb")
+  var discountedValue = ReactSession.get("discountedValue");
 var [movId,setMovieid] = useState("");
 var [seat,setSeat] = useState("");
 var [unavailableSeats, setUnavailableSeats] = useState([]);
@@ -93,6 +94,7 @@ console.log(email);
 console.log(movienam);
 console.log(movId);
 console.log(seat);
+console.log(discountedValue);
 
 
 var [selectedSeats, setSelectedSeats] = useState([]);
@@ -183,8 +185,17 @@ const renderSeats = () => {
   return seats;
 };
 
-const calculateTotalPrice = () => {
+const calculateSeatPrice = () => {
   return selectedSeats.length * seatPrice;
+};
+const calculateTotalPrice = () => {
+  var dummy = calculateSeatPrice() - discountedValue;
+  if (dummy < 0){
+return 0;
+  }
+  else{
+    return dummy;
+  }
 };
 
 const handleSubmit = (event) => {
@@ -196,7 +207,8 @@ const handleSubmit = (event) => {
   var p = calculateTotalPrice();
   setPrice(p);
   console.log(price);
-  console.log("Total Price:", calculateTotalPrice());
+  console.log("Seat Price:", calculateSeatPrice());
+  console.log("Total Price", calculateTotalPrice());
   const seatt = `[${selectedSeats.join(", ")}]`; // Convert selectedSeats array to a string enclosed in square brackets
   console.log("Seats:", seatt);
   performPut(seatt,p);
@@ -228,7 +240,20 @@ Apicalls.PutUser(udetail)
  })
 }
 useEffect(() => {
+
   if (updateSuccess) {
+    const ldetail2 = {
+      id: ids,
+    }
+    Apicalls.UpdateCoins(ldetail2)
+    .then((response) => {
+      console.log(response.data)
+      ReactSession.set("coins",response.data);
+      
+     })
+     .catch(error => {
+      console.error(error);
+     })
     const timer = setTimeout(() => {
       navigate("/movies"); // Redirect to '/movies' after 2 seconds
     }, 2000);
@@ -247,7 +272,9 @@ return (
         {selectedSeats.map((seat) => (
           <li key={seat}>{seat}</li>
         ))}
-      </ul>
+      </ul> 
+      <h4>Seat Price(+): Rs.{calculateSeatPrice()}</h4>
+      <h4>Discounted Price(-): Rs.{discountedValue}</h4>
       <h4>Total Price: Rs.{calculateTotalPrice()}</h4>
     </div>
     <form onSubmit={handleSubmit}>

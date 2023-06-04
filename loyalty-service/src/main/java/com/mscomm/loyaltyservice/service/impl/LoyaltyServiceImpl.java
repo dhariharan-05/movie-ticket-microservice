@@ -70,7 +70,7 @@ public  String getUserCoins(Long userId) {
 	    
 	}
 @Override
-public void updateCoins(Long userId) {
+public String updateCoins(Long userId) {
     Loyalty loyalty = loyaltyRepository.findByUserId(userId);
     if (loyalty != null) {
         // Increment the coin count by 1
@@ -84,11 +84,13 @@ public void updateCoins(Long userId) {
 
         // Save the updated loyalty object in the database
         loyaltyRepository.save(loyalty);
+        
     }
+    return loyalty.getCoins();
 }
 
 @Override
-public void reduceCoins(Long userId) {
+public Loyalty reduceCoins(Long userId) {
     Loyalty loyalty = loyaltyRepository.findByUserId(userId);
     if (loyalty != null) {
         // Increment the coin count by 1
@@ -108,6 +110,7 @@ public void reduceCoins(Long userId) {
         // Save the updated loyalty object in the database
         loyaltyRepository.save(loyalty);
     }
+    return loyalty;
 }
 private String calculateDiscountedValue(String coins) {
     // Perform the calculation to get the discounted value

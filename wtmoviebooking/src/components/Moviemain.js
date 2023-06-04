@@ -141,12 +141,16 @@ Cancel your reservation</Button>
         container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 2, sm: 8, md: 12 , lg:12}}
+        alignItems="center"
+        justifyContent="center"
       >
          {data &&
             data.map((i, key) => (
 
-          <Grid item xs={2} sm={4} md={4} key={key}>
+          <Grid item xs={2} sm={4} md={3.4} key={key}>
+          
              <MovieCards passed={i}  />
+             
           </Grid>
         ))}
       </Grid>

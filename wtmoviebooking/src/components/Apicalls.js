@@ -4,7 +4,8 @@ const config= {
         API_BASE_URL: 'http://localhost:8081',
         API_BASE_URL1: 'http://localhost:8082',
         API_BASE_URL2: 'http://localhost:8083',
-        API_BASE_URL3: 'https://apipro1.ocr.space/parse'
+        API_BASE_URL3: 'https://apipro1.ocr.space/parse',
+        API_BASE_URL4: 'http://localhost:8084'
     }
 }
 
@@ -17,8 +18,29 @@ export const Apicalls ={
     PutUser,
     GetSeat,
     PostUser,
-    Verify
+    Verify,
+    GetLoyalty,
+    ReduceCoins,
+    UpdateCoins
 }
+function GetLoyalty(ldetail){
+  return instance4.get('api/loyalty/'+ldetail.id,{
+    //   params: mdetail1,
+      headers: { 'Content-type': 'application/json' }
+    });
+ }
+ function ReduceCoins(ldetail1){
+  return instance4.get('api/loyalty/'+ldetail1.id +'/reduceCoins',{
+    //   params: mdetail1,
+      headers: { 'Content-type': 'application/json' }
+    });
+ }
+ function UpdateCoins(ldetail2){
+  return instance4.get('api/loyalty/'+ldetail2.id +'/updateCoins',{
+    //   params: mdetail1,
+      headers: { 'Content-type': 'application/json' }
+    });
+ }
 function Theatres(tdetail){
     return instance1.post('api/theatres',tdetail,{
         headers: { 'Content-type': 'application/json'}
@@ -91,4 +113,7 @@ const instance2 = axios.create({
 })
 const instance3 = axios.create({
   baseURL: config.url.API_BASE_URL3
+})
+const instance4 = axios.create({
+  baseURL: config.url.API_BASE_URL4
 })

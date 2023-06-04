@@ -5,6 +5,6 @@ import com.mscomm.loyaltyservice.service.impl.*;
 public interface LoyaltyService {
  Loyalty getUsersAndAddLoyalty(Long userId);
  String getUserCoins(Long userId);
- void updateCoins(Long userId);
- void reduceCoins(Long userId);
+ String updateCoins(Long userId);
+ Loyalty reduceCoins(Long userId);
 }

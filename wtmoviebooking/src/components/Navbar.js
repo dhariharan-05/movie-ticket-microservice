@@ -2,20 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { Buttonone } from './Buttonone';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import { FaCoins } from 'react-icons/fa';
+// import { faCoinVertical } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoins } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { ReactSession } from 'react-client-session';
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [usern, setUsern] = useState();
+  const [coin, setCoin] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const username = ReactSession.get("username");
+    const coin = ReactSession.get("coins");
+    setCoin(coin);
     setUsern(username);
-  }, []);
+  });
   const handleLogout = () => {
     ReactSession.set("username", null);
+    ReactSession.set("coins",null);
+    ReactSession.set("discountedValue",null);
     setUsern(null);
   };
   useEffect(() => {
@@ -47,6 +57,16 @@ function Navbar() {
   }, []);
 
   window.addEventListener('resize', showButton);
+  const pStyle = {
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '14vh',
+  };
+  const iconStyle = {
+    marginRight: '0.5em', // Adjust the margin as needed
+  };
 
   return (
     <>
@@ -93,7 +113,7 @@ function Navbar() {
                 Promotions
               </Link>
             </li> */}
-            <li className='nav-item'>
+            {/* <li className='nav-item'>
               <Link
                 to='/contactus'
                 className='nav-links'
@@ -101,7 +121,26 @@ function Navbar() {
               >
                 Contact Us
               </Link>
-            </li>
+              
+            </li> */}
+            <li className='nav-item'>
+  {usern !== null? (
+    // <Link
+    //   to='/coininformation'
+    //   className='nav-links'
+    //   onClick={closeMobileMenu}
+    // >
+    <div style={pStyle}>
+      {/* <FontAwesomeIcon icon={faCoins} style={iconStyle} /> */}
+      <FontAwesomeIcon icon={faCoins} className="coin-icon" style={iconStyle} beat />
+      {/* <FaCoins className="nav-icon" style={iconStyle} /> */}
+      <span>Coins:{coin}</span>
+    </div>
+    // </Link>
+  ) : (
+    <p style={pStyle}>No Coin Information</p>
+  )}
+</li>
 
             <li>
               {/* <Link

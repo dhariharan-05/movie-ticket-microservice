@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Register from "./pages/Register";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import {Apicalls} from "./Apicalls";
  
 // Material UI Imports
 import {
@@ -41,7 +41,8 @@ export default function Loginmain() {
   let [idInput, setIdInput] = useState();
   const [rememberMe, setRememberMe] = useState();
   let [username, setUsername] = useState('');
-  
+  let [coins, setCoins] = useState('');
+  let [discountedValue, setDiscountedValue] = useState('');
   const [renderMovies, setRenderMovies] = useState(false);
   // Inputs Errors
   const [emailError, setEmailError] = useState(false);
@@ -129,12 +130,31 @@ export default function Loginmain() {
       console.log(verifyEmail);
       console.log(emailInput);
       console.log(username);
-      verifyId();
+      getLoyalty();
+      // verifyId();
     }, (e) =>{
       console.log(e);
     })
 
   } 
+  const getLoyalty= () => {
+   const ldetail ={
+    id: idInput,
+   }
+   Apicalls.GetLoyalty(ldetail)
+   .then(response => {
+    console.log(response.data.coins);
+    setCoins(response.data.coins);
+    setDiscountedValue(response.data.discountedvalue)
+    // ReactSession.set("coins",response.data.coins)
+    verifyId();
+   })
+   .catch(error => {
+    console.error(error);
+  });
+
+  } 
+  
    const verifyId= () => {
    if(verifyEmail != emailInput){
     setFormValid("email not matched")
@@ -144,18 +164,19 @@ export default function Loginmain() {
    }
    else{
     setFormValid(null);
+    setUsername(username);
     setSuccess("form submitted")
-    if (success) {
-      setUsername(username);
+    // if (success) {
+    //   setUsername(username);
   
-      setRenderMovies(true);
-      ReactSession.set("username", username);
-      ReactSession.set("id", idInput);
-      ReactSession.set("password",passwordInput);
-      ReactSession.set("email",emailInput);
-      console.log(emailInput);
-      return;
-    }
+    //   setRenderMovies(true);
+    //   ReactSession.set("username", username);
+    //   ReactSession.set("id", idInput);
+    //   ReactSession.set("password",passwordInput);
+    //   ReactSession.set("email",emailInput);
+    //   console.log(emailInput);
+    //   return;
+    //}
     // if (success) {
     //   // setSuccess("Form Submitted Successfully");
     //   navigate("/movies"); // Replace "/another-component" with the desired route
@@ -164,9 +185,22 @@ export default function Loginmain() {
     // }
    }
    }
-   if (renderMovies) {
-    navigate("/movies");
-  }
+  //  if (renderMovies) {
+  //   navigate("/movies");
+  // }
+  useEffect(() => {
+    if (success) {
+      
+      setRenderMovies(true);
+      ReactSession.set("username", username);
+      ReactSession.set("id", idInput);
+      ReactSession.set("password", passwordInput);
+      ReactSession.set("email", emailInput);
+      ReactSession.set("coins", coins);
+      ReactSession.set("discountedValue",discountedValue);
+       navigate("/movies");
+    }
+  }, [success]);
   return (
     <div style={{width: "350px",padding:"10px",margin:"auto"}}>
       <div style={{ marginTop: "5px" }}>

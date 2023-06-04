@@ -39,13 +39,16 @@ public class LoyaltyController {
        
     }
     @GetMapping("/{userId}/updateCoins")
-    public void updateCoins(@PathVariable Long userId) {
-        loyaltyService.updateCoins(userId);
+    public ResponseEntity<String> updateCoins(@PathVariable Long userId) {
+        String coins = loyaltyService.updateCoins(userId);
+        
+        return ResponseEntity.ok(coins);
     }
 
 @GetMapping("/{userId}/reduceCoins")
-public void reduceCoins(@PathVariable Long userId) {
-    loyaltyService.reduceCoins(userId);
+public ResponseEntity<Loyalty> reduceCoins(@PathVariable Long userId) {
+    Loyalty loyalty = loyaltyService.reduceCoins(userId);
+    return ResponseEntity.ok(loyalty);
 }
 
     
