@@ -21,7 +21,8 @@ public class LoyaltyServiceImpl implements LoyaltyService {
 public Loyalty getUsersAndAddLoyalty(Long userId) {
 	
 	 ResponseEntity<ResponseDto> responseEntity = restTemplate
-             .getForEntity("http://localhost:8081/api/users/" + userId,
+//             .getForEntity("http://localhost:8081/api/users/" + userId,
+           .getForEntity("http://user-service:8081/api/users/" + userId,
 //             .getForEntity("http://localhost:8082/api/theatres/" + user.getTheatreId(),
 
      		ResponseDto.class);

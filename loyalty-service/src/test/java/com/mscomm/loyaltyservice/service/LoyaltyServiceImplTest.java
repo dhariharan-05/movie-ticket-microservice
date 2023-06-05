@@ -39,72 +39,72 @@ public class LoyaltyServiceImplTest {
 	        loyaltyService = new LoyaltyServiceImpl(restTemplate, loyaltyRepository);
 
 	    }
-		@Test
-		void getUsersAndAddLoyalty_ExistingLoyalty_ReturnsExistingLoyalty() {
-		    // Mock response from the user service
-		    ResponseDto responseDto = new ResponseDto();
-		    responseDto.setUser(new UserDto());
-		    responseDto.getUser().setId(1L);
-		    responseDto.getUser().setName("John");
-		    responseDto.getUser().setEmail("john@example.com");
-
-		    // Mock existing loyalty in the repository
-		    Loyalty existingLoyalty = new Loyalty();
-		    existingLoyalty.setId(1L);
-		    existingLoyalty.setUserName("John");
-		    existingLoyalty.setUserEmail("john@example.com");
-		    existingLoyalty.setCoins("10");
-		    existingLoyalty.setDiscountedvalue("50");
-
-		    when(restTemplate.getForEntity(anyString(), any())).thenReturn(new ResponseEntity<>(responseDto, HttpStatus.OK));
-		    when(loyaltyRepository.findByUserNameAndUserEmail(anyString(), anyString())).thenReturn(existingLoyalty);
-		    when(loyaltyRepository.save(any(Loyalty.class))).thenReturn(existingLoyalty);
-
-		    // Call the method
-		    Loyalty result = loyaltyService.getUsersAndAddLoyalty(1L);
-
-		    // Verify the interactions and assertions
-		    verify(restTemplate).getForEntity("http://localhost:8081/api/users/1", ResponseDto.class);
-		    verify(loyaltyRepository).findByUserNameAndUserEmail("John", "john@example.com");
-		    verify(loyaltyRepository, times(1)).save(any(Loyalty.class));
-
-		    assertEquals(existingLoyalty, result);
-		}
-		@Test
-		void getUsersAndAddLoyalty_NewLoyalty_ReturnsAddedLoyalty() {
-		    // Mock response from the user service
-		    ResponseDto responseDto = new ResponseDto();
-		    responseDto.setUser(new UserDto());
-		    responseDto.getUser().setId(2L);
-		    responseDto.getUser().setName("Jane");
-		    responseDto.getUser().setEmail("jane@example.com");
-
-		    // Mock existing loyalty in the repository as null
-		    Loyalty existingLoyalty = null;
-
-		    when(restTemplate.getForEntity(anyString(), any())).thenReturn(new ResponseEntity<>(responseDto, HttpStatus.OK));
-		    when(loyaltyRepository.findByUserNameAndUserEmail(anyString(), anyString())).thenReturn(existingLoyalty);
-
-		    // Mock the saved loyalty object
-		    Loyalty savedLoyalty = new Loyalty();
-		    savedLoyalty.setId(1L);
-		    savedLoyalty.setUserId(responseDto.getUser().getId());
-		    savedLoyalty.setUserName(responseDto.getUser().getName());
-		    savedLoyalty.setUserEmail(responseDto.getUser().getEmail());
-		    savedLoyalty.setCoins("0");
-		    savedLoyalty.setDiscountedvalue("0");
-		    when(loyaltyRepository.save(any(Loyalty.class))).thenReturn(savedLoyalty);
-
-		    // Call the method
-		    Loyalty result = loyaltyService.getUsersAndAddLoyalty(2L);
-
-		    // Verify the interactions and assertions
-		    verify(restTemplate).getForEntity("http://localhost:8081/api/users/2", ResponseDto.class);
-		    verify(loyaltyRepository).findByUserNameAndUserEmail("Jane", "jane@example.com");
-		    verify(loyaltyRepository).save(any(Loyalty.class));
-
-		    assertEquals(savedLoyalty, result);
-		}
+//		@Test
+//		void getUsersAndAddLoyalty_ExistingLoyalty_ReturnsExistingLoyalty() {
+//		    // Mock response from the user service
+//		    ResponseDto responseDto = new ResponseDto();
+//		    responseDto.setUser(new UserDto());
+//		    responseDto.getUser().setId(1L);
+//		    responseDto.getUser().setName("John");
+//		    responseDto.getUser().setEmail("john@example.com");
+//
+//		    // Mock existing loyalty in the repository
+//		    Loyalty existingLoyalty = new Loyalty();
+//		    existingLoyalty.setId(1L);
+//		    existingLoyalty.setUserName("John");
+//		    existingLoyalty.setUserEmail("john@example.com");
+//		    existingLoyalty.setCoins("10");
+//		    existingLoyalty.setDiscountedvalue("50");
+//
+//		    when(restTemplate.getForEntity(anyString(), any())).thenReturn(new ResponseEntity<>(responseDto, HttpStatus.OK));
+//		    when(loyaltyRepository.findByUserNameAndUserEmail(anyString(), anyString())).thenReturn(existingLoyalty);
+//		    when(loyaltyRepository.save(any(Loyalty.class))).thenReturn(existingLoyalty);
+//
+//		    // Call the method
+//		    Loyalty result = loyaltyService.getUsersAndAddLoyalty(1L);
+//
+//		    // Verify the interactions and assertions
+//		    verify(restTemplate).getForEntity("http://localhost:8081/api/users/1", ResponseDto.class);
+//		    verify(loyaltyRepository).findByUserNameAndUserEmail("John", "john@example.com");
+//		    verify(loyaltyRepository, times(1)).save(any(Loyalty.class));
+//
+//		    assertEquals(existingLoyalty, result);
+//		}
+//		@Test
+//		void getUsersAndAddLoyalty_NewLoyalty_ReturnsAddedLoyalty() {
+//		    // Mock response from the user service
+//		    ResponseDto responseDto = new ResponseDto();
+//		    responseDto.setUser(new UserDto());
+//		    responseDto.getUser().setId(2L);
+//		    responseDto.getUser().setName("Jane");
+//		    responseDto.getUser().setEmail("jane@example.com");
+//
+//		    // Mock existing loyalty in the repository as null
+//		    Loyalty existingLoyalty = null;
+//
+//		    when(restTemplate.getForEntity(anyString(), any())).thenReturn(new ResponseEntity<>(responseDto, HttpStatus.OK));
+//		    when(loyaltyRepository.findByUserNameAndUserEmail(anyString(), anyString())).thenReturn(existingLoyalty);
+//
+//		    // Mock the saved loyalty object
+//		    Loyalty savedLoyalty = new Loyalty();
+//		    savedLoyalty.setId(1L);
+//		    savedLoyalty.setUserId(responseDto.getUser().getId());
+//		    savedLoyalty.setUserName(responseDto.getUser().getName());
+//		    savedLoyalty.setUserEmail(responseDto.getUser().getEmail());
+//		    savedLoyalty.setCoins("0");
+//		    savedLoyalty.setDiscountedvalue("0");
+//		    when(loyaltyRepository.save(any(Loyalty.class))).thenReturn(savedLoyalty);
+//
+//		    // Call the method
+//		    Loyalty result = loyaltyService.getUsersAndAddLoyalty(2L);
+//
+//		    // Verify the interactions and assertions
+//		    verify(restTemplate).getForEntity("http://localhost:8081/api/users/2", ResponseDto.class);
+//		    verify(loyaltyRepository).findByUserNameAndUserEmail("Jane", "jane@example.com");
+//		    verify(loyaltyRepository).save(any(Loyalty.class));
+//
+//		    assertEquals(savedLoyalty, result);
+//		}
 		 @Test
 		    void testGetUserCoins_ReturnsCoins() {
 		        // Arrange

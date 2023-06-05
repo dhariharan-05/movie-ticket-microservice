@@ -73,7 +73,7 @@ function Reservationtwomain() {
     setIsClicked(true);
     ReactSession.set("username", null);
 
-    toast.info('Temporary registration ID generated!..redirecting you to login page', {
+    toast.info('Registration/User ID generated!..redirecting you to login page', {
       autoClose: 5000,
       onClose: () => {
         
@@ -107,9 +107,9 @@ function Reservationtwomain() {
       <form onSubmit={handleSubmit} style={styles.form}>
         <label>
           {isClicked ? (
-            `Temporary Registration ID: ${newid}`
+            `Registration/User ID: ${newid}`
           ) : (
-            'Click submit to generate a new temporary reservation ID using which you can login again and make reservations using the same credentials.'
+            'Click submit to generate a new reservation/user ID using which you can login again and make reservations using the same credentials.'
           )}
         </label>
         <button type="submit" style={{ ...styles.button, opacity: isClicked ? 0.5 : 1 }} disabled={isClicked}>
