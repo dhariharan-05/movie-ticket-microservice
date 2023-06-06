@@ -1,4 +1,6 @@
 package com.mscomm.userservice.dto;
+import java.util.Objects;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,4 +14,14 @@ public class ResponseDto {
 	 private DepartmentDto department;
 	 private MovieDto movie;
 	    private UserDto user;
-}
+	   
+	}
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,6 @@
 package com.mscomm.movieservice.service.impl;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.mscomm.movieservice.entity.Movie;
@@ -18,10 +20,16 @@ public class DepartmentServiceImpl implements DepartmentService{
 	return departmentRepository.save(department);
 	}
 
+
 	@Override
 	public Movie getDepartmentById(Long departmentId) {
-		 return departmentRepository.findById(departmentId).get();
+	    Optional<Movie> optionalMovie = departmentRepository.findById(departmentId);
+	    if (optionalMovie.isPresent()) {
+	        return optionalMovie.get();
+	    }
+	    return null; // or throw an exception, depending on your requirement
 	}
+
 	@Override
 	public Movie getDepartmentBymovieName(String movieName) {
 		 return departmentRepository.findBymovieName(movieName);

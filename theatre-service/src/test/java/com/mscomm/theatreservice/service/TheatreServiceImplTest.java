@@ -25,7 +25,7 @@ public class TheatreServiceImplTest {
     }
 
     @Test
-    public void saveDepartment_ValidDepartment_ReturnsSavedDepartment() {
+    public void saveDepartmentValidDepartmentReturnsSavedDepartment() {
         // Arrange
         Theatre department = new Theatre();
         department.setTheatreName("Ajanta Theatre");
@@ -48,7 +48,7 @@ public class TheatreServiceImplTest {
     }
 
     @Test
-    public void getDepartmentById_ExistingId_ReturnsDepartment() {
+    public void getDepartmentByIdExistingIdReturnsDepartment() {
         // Arrange
         Long departmentId = 1L;
 
@@ -68,7 +68,7 @@ public class TheatreServiceImplTest {
     }
 
     @Test
-    public void getDepartmentBytheatreName_ExistingTheatreName_ReturnsDepartment() {
+    public void getDepartmentBytheatreNameExistingTheatreNameReturnsDepartment() {
         // Arrange
         String theatreName = "Ajanta Theatre";
 

@@ -1,5 +1,7 @@
 package com.mscomm.userservice.service.impl;
 import com.mscomm.userservice.dto.ResponseDto;
+import java.util.logging.Logger;
+
 import com.mscomm.userservice.entity.User;
 import com.mscomm.userservice.service.*;
 
@@ -13,18 +15,20 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Supplier;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
-
 public class UserServiceImpl implements UserService {
 	 private static boolean isExecuting = false;
 	    private final Lock lock = new ReentrantLock();
 	 private UserRepository userRepository;
 	    private RestTemplate restTemplate;
 		 private CustomPostRepositoryImpl cpr;
+
+		 private static final Logger LOG = Logger.getLogger(UserServiceImpl.class.getName());
 
 	@Override
 	public User saveUser(User user) {
@@ -78,8 +82,10 @@ public class UserServiceImpl implements UserService {
 
         DepartmentDto departmentDto = responseEntity.getBody();
         MovieDto movieDto = responseEntity1.getBody();
+//        logger.info((Supplier<String>) responseEntity.getStatusCode());
+        LOG.info("Status Code: " + responseEntity.getStatusCode());
 
-        System.out.println(responseEntity.getStatusCode());
+//        System.out.println(responseEntity.getStatusCode());
 
         responseDto.setUser(userDto);
         responseDto.setDepartment(departmentDto);
@@ -107,24 +113,44 @@ public class UserServiceImpl implements UserService {
         }
 
         try {
-            System.out.println("Acquiring lock for User with ID: " + id);
-            User user = cpr.findByIdAndLock(id, lockMode);
-            System.out.println("Lock acquired for User with ID: " + id);
+//            System.out.println("Acquiring lock for User with ID: " + id);
+//            User user = cpr.findByIdAndLock(id, lockMode);
+//            System.out.println("Lock acquired for User with ID: " + id);
+//
+//            try {
+//                // Introduce a delay to hold the lock
+//                System.out.println("Please wait..."); // Print "Please wait" message
+//                Thread.sleep(500); // Delay of 5 seconds
+//                // Perform any desired operations while the lock is held
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//            // Releasing the lock
+//            System.out.println("Releasing lock for User with ID: " + id);
+//            // Release the lock by either committing or rolling back the transaction
+//
+//            return user;
+        	LOG.info("Acquiring lock for User with ID: " + id);
+        	User user = cpr.findByIdAndLock(id, lockMode);
+        	LOG.info("Lock acquired for User with ID: " + id);
 
-            try {
-                // Introduce a delay to hold the lock
-                System.out.println("Please wait..."); // Print "Please wait" message
-                Thread.sleep(500); // Delay of 5 seconds
-                // Perform any desired operations while the lock is held
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        	try {
+        	    // Introduce a delay to hold the lock
+        	    LOG.info("Please wait..."); // Log "Please wait" message
+        	    Thread.sleep(500); // Delay of 5 seconds
+        	    // Perform any desired operations while the lock is held
+        	} catch (InterruptedException e) {
+        	    LOG.severe("InterruptedException occurred: " + e.getMessage());
+        	    e.printStackTrace();
+        	}
 
-            // Releasing the lock
-            System.out.println("Releasing lock for User with ID: " + id);
-            // Release the lock by either committing or rolling back the transaction
+        	// Releasing the lock
+        	LOG.info("Releasing lock for User with ID: " + id);
+        	// Release the lock by either committing or rolling back the transaction
 
-            return user;
+        	return user;
+
         } finally {
             lock.unlock();
         }
@@ -157,5 +183,7 @@ public class UserServiceImpl implements UserService {
         userDto.setRestatus(user.getRestatus());
         return userDto;
     }
+
+
 
 }

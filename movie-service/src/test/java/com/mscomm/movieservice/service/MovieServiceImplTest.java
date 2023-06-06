@@ -24,14 +24,14 @@ import com.mscomm.movieservice.repository.*;
 import com.mscomm.movieservice.service.impl.DepartmentServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class MovieServiceImplTest {
+ class MovieServiceImplTest {
 	@InjectMocks
     private DepartmentServiceImpl departmentService;
     
     @Mock
     private DepartmentRepository departmentRepository;
     @Test
-    public void testSaveDepartment() {
+     void testSaveDepartment() {
         // Arrange
         Movie department = new Movie();
         when(departmentRepository.save(any(Movie.class))).thenReturn(department);
@@ -45,7 +45,7 @@ public class MovieServiceImplTest {
     }
 
     @Test
-    public void testGetDepartmentById() {
+     void testGetDepartmentById() {
         // Arrange
         Long departmentId = 1L;
         Movie department = new Movie();
@@ -60,7 +60,7 @@ public class MovieServiceImplTest {
     }
 
     @Test
-    public void testGetDepartmentBymovieName() {
+     void testGetDepartmentBymovieName() {
         // Arrange
         String movieName = "Example";
         Movie department = new Movie();

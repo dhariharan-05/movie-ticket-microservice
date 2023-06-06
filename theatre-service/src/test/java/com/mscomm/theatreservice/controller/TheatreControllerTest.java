@@ -25,7 +25,7 @@ public class TheatreControllerTest {
     }
 
     @Test
-    public void saveDepartment_ValidDepartment_ReturnsCreatedResponse() {
+    public void saveDepartmentValidDepartmentReturnsCreatedResponse() {
         // Arrange
         Theatre department = new Theatre();
         department.setTheatreName("Ajanta Theatre");
@@ -49,7 +49,7 @@ public class TheatreControllerTest {
     }
 
     @Test
-    public void getDepartmentById_ExistingId_ReturnsDepartment() {
+    public void getDepartmentByIdExistingIdReturnsDepartment() {
         // Arrange
         Long departmentId = 1L;
 
@@ -70,7 +70,7 @@ public class TheatreControllerTest {
     }
 
     @Test
-    public void getDepartmentBytheatreName_ExistingTheatreName_ReturnsDepartment() {
+    public void getDepartmentBytheatreNameExistingTheatreNameReturnsDepartment() {
         // Arrange
         String theatreName = "Ajanta Theatre";
 
@@ -90,112 +90,3 @@ public class TheatreControllerTest {
         assertEquals(department, response.getBody());
     }
 }
-//package com.mscomm.departmentservice.controller;
-//
-//import static org.mockito.Mockito.when;
-//
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import org.junit.jupiter.api.Test;
-//import org.junit.RunWith;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-//import org.springframework.boot.test.mock.mockito.MockBean;
-//import org.springframework.http.MediaType;
-//import org.springframework.test.context.junit4.SpringRunner;
-//import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-//import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-//
-//import com.fasterxml.jackson.core.JsonProcessingException;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.mscomm.departmentservice.entity.Theatre;
-//import com.mscomm.departmentservice.service.DepartmentService;
-//
-//@RunWith(SpringRunner.class)
-//@WebMvcTest(DepartmentController.class)
-//public class DepartmentControllerTest {
-//
-//	@Autowired
-//	private MockMvc mvc;
-//
-//	
-//	@MockBean
-//	private DepartmentService departmentService;
-//
-//	
-//	@Test
-//	public void getTheatreBytheatreName() throws Exception {
-//
-//		
-//		Theatre theatre = new Theatre();
-//		theatre.setTheatreName("ajanta");
-//		theatre.setId((long)4);
-//		theatre.setTheatreAddress("pondy");
-//		theatre.setTheatreSeats("3");
-//		
-//		
-//		
-//		when(departmentService.getDepartmentBytheatreName("ajanta")).thenReturn(theatre);
-//
-//		mvc.perform(get("/api/appointment/kavya").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-//				.andExpect(jsonPath("$.theatrename").value("ajanta"));
-//
-//	}
-//
-//	@Test
-//	public void saveUser() throws Exception {
-//
-//		Theatre theatre = new Theatre();
-//		theatre.setTheatreName("ajanta");
-//		theatre.setId((long)4);
-//		theatre.setTheatreAddress("py");
-//		theatre.setTheatreSeats("3");
-//		
-//		
-//
-//		when(departmentService.saveDepartment(theatre)).thenReturn(theatre);
-//
-//		mvc.perform(MockMvcRequestBuilders.post("/api/theatre").content(asJsonString(theatre))
-//				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-//	}
-//
-//	@Test
-//	public void getAllTheatres() throws Exception {
-//
-//		Theatre theatre = new Theatre();
-//		theatre.setTheatreName("ajanta");
-//		theatre.setId((long)4);
-//		theatre.setTheatreAddress("pondy");
-//		theatre.setTheatreSeats("3");
-//		
-//		
-//		Theatre theatre1 = new Theatre();
-//		theatre1.setTheatreName("ajanta");
-//		theatre1.setId((long)4);
-//		theatre1.setTheatreAddress("pondicherry");
-//		theatre1.setTheatreSeats("3");
-//		
-//		
-//		List<Theatre> theatres = new ArrayList<Theatre>();
-//		theatres.add(theatre1);
-//		theatres.add(theatre);
-//
-//		when(departmentService.getAllTheatres()).thenReturn(theatres);
-//
-//		mvc.perform(get("/api/theatre").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-//				.andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(2));
-//		
-//	}
-//
-//	public static String asJsonString(final Object obj) throws JsonProcessingException {
-//
-//		return new ObjectMapper().writeValueAsString(obj);
-//
-//	}
-//}

@@ -31,7 +31,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void saveUser_ValidUser_ReturnsCreatedResponse() {
+    public void saveUserValidUserReturnsCreatedResponse() {
         // Arrange
         User user = new User();
         when(userService.saveUser(user)).thenReturn(user);
@@ -46,7 +46,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUser_ValidUserId_ReturnsResponseDto() {
+    public void getUserValidUserIdReturnsResponseDto() {
         // Arrange
         Long userId = 1L;
         ResponseDto expectedResponseDto = new ResponseDto();
@@ -62,7 +62,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUserByTheatreIdAndMovieId_ValidTheatreIdAndMovieId_ReturnsListOfUsers() {
+    public void getUserByTheatreIdAndMovieIdValidTheatreIdAndMovieIdReturnsListOfUsers() {
         // Arrange
         String theatreId = "1";
         String movieId = "2";
@@ -82,7 +82,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUserByDetails_ValidTheatreIdMovieIdAndDatetime_ReturnsListOfUsers() {
+    public void getUserByDetailsValidTheatreIdMovieIdAndDatetimeReturnsListOfUsers() {
         // Arrange
         String theatreId = "1";
         String movieId = "2";
@@ -103,7 +103,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUser_ValidUserIdAndUser_ReturnsUpdatedUser() {
+    public void updateUserValidUserIdAndUserReturnsUpdatedUser() {
         // Arrange
         Long userId = 1L;
         User updatedUser = new User();
