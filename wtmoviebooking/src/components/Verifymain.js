@@ -101,9 +101,6 @@ function Verifymain() {
       const monthDiff = today.getMonth() - dob.getMonth();
       const dayDiff = today.getDate() - dob.getDate();
 
-      if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-        ageDiff--;
-      }
 
       if (ageDiff >= 18) {
         setAgematched(true);
@@ -122,7 +119,7 @@ function Verifymain() {
   //   performVerify();
   //   matchDetails();
   //   ageDetails();
-  // }, [dobverify,call]);
+  // }, [dobverify,call,formattedDate]);
   useEffect(() => {
     performVerify();
   }, [dobverify, call]);
